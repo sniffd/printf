@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include <stdarg.h>
 
 int main()
 {
+	printf("Test, %lli", 2);
 	return 0;
 }
