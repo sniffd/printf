@@ -3,28 +3,22 @@
 int	ft_printf(const char *format, ...)
 {
 	va_list	ap;
-	int		t;
-	int		*f;
+	t_f		*f;
 
-	t = 0;
-//	f = ft_memalloc(sizeof(int) * )
+	f = 0;
 	va_start(ap, format);
 	while (*format)
 	{
-		if (!t && *format == '%')
+		if (*format == '%')
 		{
-			t = 1;
 			format++;
+			f = parse(&format, ap);
+			if (f->f == 'i' || f->f == 'd')
+				integer(f, ap);
 		}
-		else if (!t)
+		else
 		{
 			ft_putchar(*format);
-			format++;
-		}
-		else if (t && *format == 'i')
-		{
-			ft_putnbr(va_arg(ap, int));
-			t = 0;
 			format++;
 		}
 	}

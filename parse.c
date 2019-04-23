@@ -1,7 +1,7 @@
 #include "ft_printf.h"
 #define S *s
 
-void	parse_flags(char s, t_f *f)
+static void	parse_flags(const char s, t_f *f)
 {
 	if (s == '#')
 		f->okt = 1;
@@ -15,7 +15,7 @@ void	parse_flags(char s, t_f *f)
 		f->zer = 1;
 }
 
-void	parse_size(char s, t_f *f)
+static void	parse_size(const char s, t_f *f)
 {
 	if (s == 'L')
 		f->bl = 1;
@@ -31,16 +31,17 @@ void	parse_size(char s, t_f *f)
 	}
 }
 
-void	parse_dot_or_wid(char *s, t_f *f, va_list ap, int flag)
+static void	parse_pre_or_wid(const char *s, t_f *f, va_list ap, int flag)
 {
 	if (flag)
 	{
 		if (S == '.')
 		{
+			f->dot = 1;
 			if (*(s + 1) == '*')
-				f->dot = va_arg(ap, int);
+				f->pre = va_arg(ap, int);
 			else
-				f->dot = ft_atoi(s + 1);
+				f->pre = ft_atoi(s + 1);
 		}
 	}
 	else
@@ -52,7 +53,7 @@ void	parse_dot_or_wid(char *s, t_f *f, va_list ap, int flag)
 	}
 }
 
-int	parse_zone(char s, int zone)
+static int	parse_zone(const char s, int zone)
 {
 	if (zone < 1 && ((s >= 49 && s <= 57) || s == '*'))
 		zone = 1;
@@ -63,13 +64,13 @@ int	parse_zone(char s, int zone)
 	return (zone);
 }
 
-t_f	*parse(char **s, va_list ap)
+t_f			*parse(const char **s, va_list ap)
 {
 	t_f *f;
 	int	zone;
 
 	if (!(f = (t_f *)ft_memalloc(sizeof(t_f))))
-		return 0;
+		return (0);
 	zone = 0;
 	while (*S != 'd' && *S != 'i' && *S != 'o' && *S != 'u' && *S != 'x' &&
 	*S != 'X' && *S != 'f' && *S != 'c' && *S != 's' && *S != 'p' && *S != '%')
@@ -78,13 +79,14 @@ t_f	*parse(char **s, va_list ap)
 		if (zone == 0)
 			parse_flags(**s, f);
 		else if (zone == 1)
-			parse_dot_or_wid(S, f, ap, 0);
+			parse_pre_or_wid(S, f, ap, 0);
 		else if (zone == 2)
-			parse_dot_or_wid(S, f, ap, 1);
+			parse_pre_or_wid(S, f, ap, 1);
 		else
 			parse_size(**s, f);
 		(S)++;
 	}
 	f->f = *S;
+	(S)++;
 	return (f);
 }
