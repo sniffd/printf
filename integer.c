@@ -4,14 +4,13 @@
 int	integer(t_f *f, va_list	ap)
 {
 	char	*in;
-	int		i;
 	int 	len;
 	int 	arg;
 
-	i = 0;
 	arg = va_arg(ap, int);
 	in = ft_itoa((int)ft_abs(arg));
-	len = f->wid - ft_strlen(in);
+	len = (f->plu || f->spc || arg < 0) ? f->wid - (long)ft_strlen(in) - 1 :
+			f->wid - (long)ft_strlen(in);
 	if (len <= 0)
 	{
 		if (arg < 0)
@@ -20,14 +19,11 @@ int	integer(t_f *f, va_list	ap)
 			ft_putchar('+');
 		else if (f->spc)
 			ft_putchar(' ');
-		len = f->pre - ft_strlen(in);
-		if (len > 0)
+		len = f->pre - (long)ft_strlen(in);
+		while (len > 0)
 		{
-			while (i < len)
-			{
-				ft_putchar('0');
-				i++;
-			}
+			ft_putchar('0');
+			len--;
 		}
 		ft_putstr(in);
 	}
@@ -39,14 +35,14 @@ int	integer(t_f *f, va_list	ap)
 			ft_putchar('+');
 		else if (f->spc)
 			ft_putchar(' ');
-		while (i < len)
+		while (len > 0)
 		{
 			ft_putchar('0');
-			i++;
+			len--;
 		}
 		ft_putstr(in);
 	}
-	else if (f->dot)
+	else if (f->dot || f->wid)
 	{
 		if (f->min)
 		{
@@ -54,18 +50,20 @@ int	integer(t_f *f, va_list	ap)
 				ft_putchar('+');
 			else if (arg < 0)
 				ft_putchar('-');
-			if ((f->pre - ft_strlen(in)) > 0)
+			else if (f->spc)
+				ft_putchar(' ');
+			if ((f->pre - (long)ft_strlen(in)) > 0)
 			{
-				len = f->wid - (f->pre - ft_strlen(in));
+				len = f->wid - (f->pre - (long)ft_strlen(in));
 				if (len > 0)
 				{
-					len = f->pre - ft_strlen(in);
+					len = f->pre - (long)ft_strlen(in);
 					while (len > 0)
 					{
 						ft_putchar('0');
 						len--;
 					}
-					len = (arg <= 0) || (f->plu) ? f->wid - f->pre - 1 :
+					len = (f->plu || f->spc || arg < 0) ? f->wid - f->pre - 1 :
 							f->wid - f->pre;
 					ft_putstr(in);
 					while (len > 0)
@@ -75,23 +73,34 @@ int	integer(t_f *f, va_list	ap)
 					}
 				}
 			}
-			else if (arg)
+			else
 				ft_putstr(in);
-			while (i < len)
+			while (len > 0)
 			{
 				ft_putchar(' ');
-				i++;
+				len--;
 			}
 		}
 		else
 		{
-			while (i < len)
+			len = (f->plu || f->spc || arg < 0) ? f->wid - f->pre - 1 :
+				  f->wid - f->pre;
+			while (len > 0)
 			{
 				ft_putchar(' ');
-				i++;
+				len--;
 			}
-			if (arg)
-				ft_putstr(in);
+			if (arg < 0)
+				ft_putchar('-');
+			else if (f->plu)
+				ft_putchar('+');
+			len = f->pre - (long)ft_strlen(in);
+			while (len > 0)
+			{
+				ft_putchar('0');
+				len--;
+			}
+			ft_putstr(in);
 		}
 	}
 	return (0);
