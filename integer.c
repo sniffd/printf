@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-void	printsign(int number, int plu, int spc)
+void	print_sign(int number, int plu, int spc)
 {
 	if (number < 0)
 		ft_putchar('-');
@@ -14,7 +14,7 @@ void	minus(int arg, int len, char *in, t_f *f)
 {
 	int	tmplen;
 
-	printsign(arg, f->plu, f->spc);
+	print_sign(arg, f->plu, f->spc);
 	tmplen = f->pre - len;
 	if (tmplen <= 0)
 	{
@@ -46,7 +46,7 @@ void	precision(int arg, int len, char *in, t_f *f)
 	if (tmplen <= 0)
 	{
 		tmplen = f->pre - len;
-		printsign(arg, f->plu, f->spc);
+		print_sign(arg, f->plu, f->spc);
 		ft_putcharn('0', tmplen);
 		ft_putstr(in);
 	}
@@ -54,7 +54,7 @@ void	precision(int arg, int len, char *in, t_f *f)
 	{
 		ft_putcharn(' ', tmplen);
 		tmplen = f->pre - len;
-		printsign(arg, f->plu, f->spc);
+		print_sign(arg, f->plu, f->spc);
 		ft_putcharn('0', tmplen);
 		ft_putstr(in);
 	}
@@ -64,14 +64,14 @@ void	zero_and_else(int arg, char *in, int tmplen, t_f *f)
 {
 	if (f->zer && !(f->dot))
 	{
-		printsign(arg, f->plu, f->spc);
+		print_sign(arg, f->plu, f->spc);
 		ft_putcharn('0', tmplen);
 		ft_putstr(in);
 	}
 	else
 	{
 		ft_putcharn(' ', tmplen);
-		printsign(arg, f->plu, f->spc);
+		print_sign(arg, f->plu, f->spc);
 		ft_putstr(in);
 	}
 }
@@ -89,7 +89,7 @@ int		integer(t_f *f, va_list ap)
 	tmplen = (f->plu || f->spc || arg < 0) ? f->wid - len - 1 : f->wid - len;
 	if (tmplen <= 0)
 	{
-		printsign(arg, f->plu, f->spc);
+		print_sign(arg, f->plu, f->spc);
 		tmplen = f->pre - len;
 		ft_putcharn('0', tmplen);
 		ft_putstr(in);
