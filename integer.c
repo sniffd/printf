@@ -10,78 +10,95 @@ void	printsign(int number, int plu, int spc)
 		ft_putchar(' ');
 }
 
-int	integer(t_f *f, va_list	ap)
+void	minus(int arg, int len, char *in, t_f *f)
 {
-	char	*in;
-	int 	len;
-	int 	arg;
+	int	tmplen;
 
-	arg = va_arg(ap, int);
-	in = ft_itoa((int)ft_abs(arg));
-	len = (f->plu || f->spc || arg < 0) ? f->wid - (int)ft_strlen(in) - 1 :
-			f->wid - (int)ft_strlen(in);
-	if (len <= 0)
+	printsign(arg, f->plu, f->spc);
+	tmplen = f->pre - len;
+	if (tmplen <= 0)
 	{
-		printsign(arg, f->plu, f->spc);
-		len = f->pre - (int)ft_strlen(in);
-		ft_putcharn('0', len);
 		ft_putstr(in);
+		tmplen = (f->plu || f->spc || arg < 0) ? f->wid - len - 1 :
+			f->wid - len;
+		ft_putcharn(' ', tmplen);
 	}
-	else if (f->min)
+	else
 	{
+		ft_putcharn('0', tmplen);
+		ft_putstr(in);
+		tmplen = (f->plu || f->spc || arg < 0) ? f->wid - f->pre - 1 :
+			f->wid - f->pre;
+		ft_putcharn(' ', tmplen);
+	}
+}
+
+void	precision(int arg, int len, char *in, t_f *f)
+{
+	int	tmplen;
+
+	if (f->pre >= len)
+		tmplen = (f->plu || f->spc || arg < 0) ? f->wid - f->pre - 1 :
+			f->wid - f->pre;
+	else
+		tmplen = (f->plu || f->spc || arg < 0) ? f->wid - len - 1 :
+			f->wid - len;
+	if (tmplen <= 0)
+	{
+		tmplen = f->pre - len;
 		printsign(arg, f->plu, f->spc);
-		len = f->pre - (int)ft_strlen(in);
-		if (len <= 0)
-		{
-			ft_putstr(in);
-			len = (f->plu || f->spc || arg < 0) ? f->wid -
-				(int)ft_strlen(in) - 1 : f->wid - (int)ft_strlen(in);
-			ft_putcharn(' ', len);
-		}
-		else
-		{
-			ft_putcharn('0', len);
-			ft_putstr(in);
-			len = (f->plu || f->spc || arg < 0) ? f->wid - f->pre - 1 :
-					f->wid - f->pre;
-			ft_putcharn(' ', len);
-		}
-	}
-	else if (f->dot)
-	{
-		if (f->pre >= (int)ft_strlen(in))
-			len = (f->plu || f->spc || arg < 0) ? f->wid - f->pre - 1 :
-					f->wid - f->pre;
-		else
-			len = (f->plu || f->spc || arg < 0) ? f->wid - (int)ft_strlen(in) -
-					1 : f->wid - (int)ft_strlen(in);
-		if (len <= 0)
-		{
-			len = f->pre - (int)ft_strlen(in);
-			printsign(arg, f->plu, f->spc);
-			ft_putcharn('0', len);
-			ft_putstr(in);
-		}
-		else
-		{
-			ft_putcharn(' ', len);
-			len = f->pre - (int)ft_strlen(in);
-			printsign(arg, f->plu, f->spc);
-			ft_putcharn('0', len);
-			ft_putstr(in);
-		}
-	}
-	else if (f->zer && !(f->dot))
-	{
-		printsign(arg, f->plu, f->spc);
-		ft_putcharn('0', len);
+		ft_putcharn('0', tmplen);
 		ft_putstr(in);
 	}
 	else
 	{
-		ft_putcharn(' ', len);
+		ft_putcharn(' ', tmplen);
+		tmplen = f->pre - len;
+		printsign(arg, f->plu, f->spc);
+		ft_putcharn('0', tmplen);
+		ft_putstr(in);
+	}
+}
+
+void	zero_and_else(int arg, char *in, int tmplen, t_f *f)
+{
+	if (f->zer && !(f->dot))
+	{
+		printsign(arg, f->plu, f->spc);
+		ft_putcharn('0', tmplen);
+		ft_putstr(in);
+	}
+	else
+	{
+		ft_putcharn(' ', tmplen);
 		printsign(arg, f->plu, f->spc);
 		ft_putstr(in);
 	}
+}
+
+int		integer(t_f *f, va_list ap)
+{
+	char	*in;
+	int		tmplen;
+	int		len;
+	int		arg;
+
+	arg = va_arg(ap, int);
+	in = ft_itoa((int)ft_abs(arg));
+	len = (int)ft_strlen(in);
+	tmplen = (f->plu || f->spc || arg < 0) ? f->wid - len - 1 : f->wid - len;
+	if (tmplen <= 0)
+	{
+		printsign(arg, f->plu, f->spc);
+		tmplen = f->pre - len;
+		ft_putcharn('0', tmplen);
+		ft_putstr(in);
+	}
+	else if (f->min)
+		minus(arg, len, in, f);
+	else if (f->dot)
+		precision(arg, len, in, f);
+	else
+		zero_and_else(arg, in, tmplen, f);
 	return (0);
 }
