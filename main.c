@@ -6,7 +6,7 @@
 
 int	main(int argc, char **argv)
 {
-//	int_test();
-	printf("% 020i", 5);
+	int_test();
+//	printf("% 020i", 5);
 	return (0);
 }

@@ -1,5 +1,14 @@
 #include "ft_printf.h"
 
+void	printsign(int number, int plu, int spc)
+{
+	if (number < 0)
+		ft_putchar('-');
+	else if (plu)
+		ft_putchar('+');
+	else if (spc)
+		ft_putchar(' ');
+}
 
 int	integer(t_f *f, va_list	ap)
 {
@@ -9,99 +18,70 @@ int	integer(t_f *f, va_list	ap)
 
 	arg = va_arg(ap, int);
 	in = ft_itoa((int)ft_abs(arg));
-	len = (f->plu || f->spc || arg < 0) ? f->wid - (long)ft_strlen(in) - 1 :
-			f->wid - (long)ft_strlen(in);
+	len = (f->plu || f->spc || arg < 0) ? f->wid - (int)ft_strlen(in) - 1 :
+			f->wid - (int)ft_strlen(in);
 	if (len <= 0)
 	{
-		if (arg < 0)
-			ft_putchar('-');
-		else if (f->plu)
-			ft_putchar('+');
-		else if (f->spc)
-			ft_putchar(' ');
-		len = f->pre - (long)ft_strlen(in);
-		while (len > 0)
-		{
-			ft_putchar('0');
-			len--;
-		}
+		printsign(arg, f->plu, f->spc);
+		len = f->pre - (int)ft_strlen(in);
+		ft_putcharn('0', len);
 		ft_putstr(in);
 	}
-	else if (f->zer && !(f->min) && !(f->dot))
+	else if (f->min)
 	{
-		if (arg < 0)
-			ft_putchar('-');
-		else if (f->plu)
-			ft_putchar('+');
-		else if (f->spc)
-			ft_putchar(' ');
-		while (len > 0)
+		printsign(arg, f->plu, f->spc);
+		len = f->pre - (int)ft_strlen(in);
+		if (len <= 0)
 		{
-			ft_putchar('0');
-			len--;
-		}
-		ft_putstr(in);
-	}
-	else if (f->dot || f->wid)
-	{
-		if (f->min)
-		{
-			if (f->plu && arg >= 0)
-				ft_putchar('+');
-			else if (arg < 0)
-				ft_putchar('-');
-			else if (f->spc)
-				ft_putchar(' ');
-			if ((f->pre - (long)ft_strlen(in)) > 0)
-			{
-				len = f->wid - (f->pre - (long)ft_strlen(in));
-				if (len > 0)
-				{
-					len = f->pre - (long)ft_strlen(in);
-					while (len > 0)
-					{
-						ft_putchar('0');
-						len--;
-					}
-					len = (f->plu || f->spc || arg < 0) ? f->wid - f->pre - 1 :
-							f->wid - f->pre;
-					ft_putstr(in);
-					while (len > 0)
-					{
-						ft_putchar(' ');
-						len--;
-					}
-				}
-			}
-			else
-				ft_putstr(in);
-			while (len > 0)
-			{
-				ft_putchar(' ');
-				len--;
-			}
+			ft_putstr(in);
+			len = (f->plu || f->spc || arg < 0) ? f->wid -
+				(int)ft_strlen(in) - 1 : f->wid - (int)ft_strlen(in);
+			ft_putcharn(' ', len);
 		}
 		else
 		{
+			ft_putcharn('0', len);
+			ft_putstr(in);
 			len = (f->plu || f->spc || arg < 0) ? f->wid - f->pre - 1 :
-				  f->wid - f->pre;
-			while (len > 0)
-			{
-				ft_putchar(' ');
-				len--;
-			}
-			if (arg < 0)
-				ft_putchar('-');
-			else if (f->plu)
-				ft_putchar('+');
-			len = f->pre - (long)ft_strlen(in);
-			while (len > 0)
-			{
-				ft_putchar('0');
-				len--;
-			}
+					f->wid - f->pre;
+			ft_putcharn(' ', len);
+		}
+	}
+	else if (f->dot)
+	{
+		if (f->pre >= (int)ft_strlen(in))
+			len = (f->plu || f->spc || arg < 0) ? f->wid - f->pre - 1 :
+					f->wid - f->pre;
+		else
+			len = (f->plu || f->spc || arg < 0) ? f->wid - (int)ft_strlen(in) -
+					1 : f->wid - (int)ft_strlen(in);
+		if (len <= 0)
+		{
+			len = f->pre - (int)ft_strlen(in);
+			printsign(arg, f->plu, f->spc);
+			ft_putcharn('0', len);
 			ft_putstr(in);
 		}
+		else
+		{
+			ft_putcharn(' ', len);
+			len = f->pre - (int)ft_strlen(in);
+			printsign(arg, f->plu, f->spc);
+			ft_putcharn('0', len);
+			ft_putstr(in);
+		}
+	}
+	else if (f->zer && !(f->dot))
+	{
+		printsign(arg, f->plu, f->spc);
+		ft_putcharn('0', len);
+		ft_putstr(in);
+	}
+	else
+	{
+		ft_putcharn(' ', len);
+		printsign(arg, f->plu, f->spc);
+		ft_putstr(in);
 	}
 	return (0);
 }
