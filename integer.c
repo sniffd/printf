@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-void	print_sign(int number, int plu, int spc)
+static void	print_sign(int number, int plu, int spc)
 {
 	if (number < 0)
 		ft_putchar('-');
@@ -10,7 +10,7 @@ void	print_sign(int number, int plu, int spc)
 		ft_putchar(' ');
 }
 
-void	minus(int arg, int len, char *in, t_f *f)
+static void	minus(int arg, int len, char *in, t_f *f)
 {
 	int	tmplen;
 
@@ -33,7 +33,7 @@ void	minus(int arg, int len, char *in, t_f *f)
 	}
 }
 
-void	precision(int arg, int len, char *in, t_f *f)
+static void	precision(int arg, int len, char *in, t_f *f)
 {
 	int	tmplen;
 
@@ -60,7 +60,7 @@ void	precision(int arg, int len, char *in, t_f *f)
 	}
 }
 
-void	zero_and_else(int arg, char *in, int tmplen, t_f *f)
+static void	zero_and_else(int arg, char *in, int tmplen, t_f *f)
 {
 	if (f->zer && !(f->dot))
 	{
@@ -76,7 +76,7 @@ void	zero_and_else(int arg, char *in, int tmplen, t_f *f)
 	}
 }
 
-int		integer(t_f *f, va_list ap)
+int			integer(t_f *f, va_list ap)
 {
 	char	*in;
 	int		tmplen;
