@@ -12,10 +12,11 @@
 
 #include "libft.h"
 
-long long	ft_abs(long long n)
+size_t	ft_abs(long long n)
 {
-	if (n > 0)
-		return (n);
-	else
-		return (-n);
+	size_t	res;
+	if (n > 0 && (res = n))
+		return (res);
+	else if ((res = -n))
+		return (res);
 }
