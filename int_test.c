@@ -55,4 +55,14 @@ void	int_test(void)
 	ft_printf("% 010d\n", -123125);
 	printf("%+010d\n", -123125);
 	ft_printf("%+010d\n", -123125);
+	printf("%d\n", 123125);
+	ft_printf("%d\n", 123125);
+	printf("%hhd\n", 123125);
+	ft_printf("%hhd\n", 123125);
+	printf("%hd\n", 123125);
+	ft_printf("%hd\n", 123125);
+	printf("%ld\n", 123125);
+	ft_printf("%ld\n", 123125);
+	printf("%lld\n", 123125);
+	ft_printf("%lld\n", 123125);
 }
