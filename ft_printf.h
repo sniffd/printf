@@ -33,5 +33,7 @@ int		int_short(t_f *f, va_list ap);
 int		int_int(t_f *f, va_list ap);
 int		int_long(t_f *f, va_list ap);
 int		int_long_long(t_f *f, va_list ap);
+int		string(va_list ap, t_f *f);
+int		character(va_list ap, t_f *f);
 
 #endif

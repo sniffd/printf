@@ -65,4 +65,24 @@ void	int_test(void)
 	ft_printf("%ld\n", 123125);
 	printf("%lld\n", 123125);
 	ft_printf("%lld\n", 123125);
+	printf("%10s\n", "asd");
+	ft_printf("%10s\n", "asd");
+	printf("%-50s - %s\n", "asd", "zxc");
+	ft_printf("%-50s - %s\n", "asd", "zxc");
+	printf("%cqwe\n", 97);
+	ft_printf("%cqwe\n", 97);
+	printf("%c - %cqwe\n", 97, 97);
+	ft_printf("%c - %cqwe\n", 97, 97);
+	printf("%cqwe\n", 97, 97);
+	ft_printf("%cqwe\n", 97, 97);
+	printf("%1c\n", 97);
+	ft_printf("%1c\n", 97);
+	printf("%10c\n", 97);
+	ft_printf("%10c\n", 97);
+	printf("%-c\n", 97);
+	ft_printf("%-c\n", 97);
+	printf("%-1c\n", 97);
+	ft_printf("%-1c\n", 97);
+	printf("%-10c\n", 97);
+	ft_printf("%-10c\n", 97);
 }
