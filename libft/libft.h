@@ -13,6 +13,7 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <string.h>
+# include <stdlib.h>
 
 typedef struct	s_list
 {
@@ -67,6 +68,7 @@ char			*ft_strtrim(char const *s);
 char			**ft_strsplit(char const *s, char c);
 size_t			ft_strchlen(const char *s, char c);
 char			*ft_itoa(int n);
+char			*ft_itoa_base(unsigned int n, int base);
 void			ft_putchar(char c);
 void			ft_putstr(char const *s);
 void			ft_putendl(char const *s);

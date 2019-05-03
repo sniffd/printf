@@ -14,9 +14,5 @@
 
 size_t	ft_abs(long long n)
 {
-	size_t	res;
-	if (n > 0 && (res = n))
-		return (res);
-	else if ((res = -n))
-		return (res);
+	return (n < 0 ? -n : n);
 }
