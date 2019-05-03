@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int	character(va_list ap, t_f *f)
+int	character(t_f *f, va_list ap)
 {
 	char	c;
 

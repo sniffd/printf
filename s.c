@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int	string(va_list ap, t_f *f)
+int	string(t_f *f, va_list ap)
 {
 	size_t	len;
 	char	*s;
