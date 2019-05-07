@@ -56,6 +56,7 @@ void	precision(long long arg, int len, char *in, t_f *f)
 		tmplen = f->pre - len;
 		print_sign(arg, f->plu, f->spc);
 		ft_putcharn('0', tmplen);
+		in = !(!f->pre && !arg) ? in : " ";
 		ft_putstr(in);
 	}
 }
