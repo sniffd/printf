@@ -97,5 +97,6 @@ void			*ft_memjoin(const void *s1, const void *s2, size_t l1,
 void			*ft_memfjoin(void **s1, const void *s2, size_t l1, size_t l2);
 void			*ft_memsub(char const *s, unsigned int start, size_t len);
 void			ft_putcharn(char c, ssize_t	n);
+char			*ft_vector(char *vector , const char *str, size_t i_size);
 
 #endif
