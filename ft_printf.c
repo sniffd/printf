@@ -14,10 +14,14 @@ int	ft_printf(const char *format, ...)
 			f = parse(&format, ap);
 			if (f->f == 'i' || f->f == 'd')
 				integer(f, ap);
+			else if (f->f == 'o')
+				octal(f, ap);
 			else if (f->f == 's')
-				string(ap, f);
+				string(f, ap);
 			else if (f->f == 'c')
-				character(ap, f);
+				character(f, ap);
+			else if (f->f == 'X')
+				hex(f, ap);
 		}
 		else
 		{

@@ -23,6 +23,8 @@ void	int_test(void)
 	ft_printf("% 010d\n", 123125);
 	printf("%3.2d\n", 0);
 	ft_printf("%3.2d\n", 0);
+	printf("%+.lld\n", 0);
+	ft_printf("%+.lld\n", 0);
 	printf("% d\n", 12);
 	ft_printf("% d\n", 12);
 	printf("%+d\n", 12);
@@ -67,8 +69,8 @@ void	int_test(void)
 	ft_printf("%lld\n", 123125);
 	printf("%10s\n", "asd");
 	ft_printf("%10s\n", "asd");
-	printf("%-50s - %s\n", "asd", "zxc");
-	ft_printf("%-50s - %s\n", "asd", "zxc");
+	printf("%-50s - %s\n", "asd", "zXc");
+	ft_printf("%-50s - %s\n", "asd", "zXc");
 	printf("%cqwe\n", 97);
 	ft_printf("%cqwe\n", 97);
 	printf("%c - %cqwe\n", 97, 97);
@@ -85,4 +87,22 @@ void	int_test(void)
 	ft_printf("%-1c\n", 97);
 	printf("%-10c\n", 97);
 	ft_printf("%-10c\n", 97);
+	printf("%#o\n", 0);
+	ft_printf("%#o\n", 0);
+	printf("%#.o\n", 1);
+	ft_printf("%#.o\n", 1);
+	printf("%#.o\n", 42);
+	ft_printf("%#.o\n", 42);
+	printf("%#.7o\n", 0);
+	ft_printf("%#.7o\n", 0);
+	printf("%#08.4X\n", 42);
+	ft_printf("%#08.4X\n", 42);
+	printf("%010.5X\n", 0);
+	ft_printf("%010.5X\n", 0);
+	printf("%010.X %010.0X\n", 0, 0);
+	ft_printf("%010.X %010.0X\n", 0, 0);
+	printf("%#08X\n", 0);
+	ft_printf("%#08X\n", 0);
+	printf("%#-08X\n", 0);
+	ft_printf("%#-08X\n", 0);
 }
