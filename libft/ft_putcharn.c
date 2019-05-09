@@ -1,6 +1,6 @@
 #include "libft.h"
 
-void	ft_putcharn(char c, ssize_t	n)
+void	ft_putcharn(char c, ssize_t n)
 {
 	while (n > 0)
 	{
