@@ -1,9 +1,12 @@
 #include "ft_printf.h"
 
+char	*vector = NULL;
+t_f		*f = NULL;
+
 int	ft_printf(const char *format, ...)
 {
 	va_list	ap;
-	t_f		*f;
+	int		len;
 
 	va_start(ap, format);
 	while (*format)
@@ -13,23 +16,28 @@ int	ft_printf(const char *format, ...)
 			format++;
 			f = parse(&format, ap);
 			if (f->f == 'i' || f->f == 'd')
-				integer(f, ap);
+				integer(ap);
 			else if (f->f == 'o')
-				octal(f, ap);
+				octal(ap);
 			else if (f->f == 's')
-				string(f, ap);
+				string(ap);
 			else if (f->f == 'c')
-				character(f, ap);
+				character(ap);
 			else if (f->f == 'X')
-				hex(f, ap);
+				big_hex(ap);
+			else if (f->f == 'x')
+				hex(ap);
 		}
 		else
 		{
-			ft_putchar(*format);
+			vector = ft_vector(vector, format, 5, 1);
 			format++;
 		}
 	}
 	va_end(ap);
-	return (0);
+	len = ft_strlen(vector);
+	write(1, vector, len);
+	ft_strdel(&vector);
+	return (len);
 }
 //%[флаги][ширина][.точность][размер]тип

@@ -1,16 +1,15 @@
 #include "ft_printf.h"
 
-int	octal(t_f *f, va_list ap)
+void octal(va_list ap)
 {
 	if (f->hh)
-		o_char(f, ap);
+		o_char(ap);
 	else if (f->h)
-		o_short(f, ap);
+		o_short(ap);
 	else if (f->ll)
-		o_long_long(f, ap);
+		o_long_long(ap);
 	else if (f->l)
-		o_long(f, ap);
+		o_long(ap);
 	else
-		o_int(f, ap);
-	return (0);
+		o_int(ap);
 }

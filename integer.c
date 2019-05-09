@@ -1,6 +1,7 @@
 #include "ft_printf.h"
+#include <stdio.h>
 
-int	int_char(t_f *f, va_list ap)
+void	int_char(va_list ap)
 {
 	char	*in;
 	int		tmplen;
@@ -15,19 +16,19 @@ int	int_char(t_f *f, va_list ap)
 	{
 		print_sign(arg, f->plu, f->spc);
 		tmplen = f->pre - len;
-		ft_putcharn('0', tmplen);
-		ft_putstr(in);
+		addcharn('0', tmplen);
+		if (!(!f->pre && !arg))
+			vector = ft_vector(vector, in, 5, 0);
 	}
 	else if (f->min)
-		minus(arg, len, in, f);
+		minus(arg, len, in);
 	else if (f->dot)
-		precision(arg, len, in, f);
+		precision(arg, len, in);
 	else
-		zero_and_else(arg, in, tmplen, f);
-	return (0);
+		zero_and_else(arg, in, tmplen);
 }
 
-int	int_short(t_f *f, va_list ap)
+void	int_short(va_list ap)
 {
 	char	*in;
 	int		tmplen;
@@ -42,19 +43,19 @@ int	int_short(t_f *f, va_list ap)
 	{
 		print_sign(arg, f->plu, f->spc);
 		tmplen = f->pre - len;
-		ft_putcharn('0', tmplen);
-		ft_putstr(in);
+		addcharn('0', tmplen);
+		if (!(!f->pre && !arg))
+			vector = ft_vector(vector, in, 5, 0);
 	}
 	else if (f->min)
-		minus(arg, len, in, f);
+		minus(arg, len, in);
 	else if (f->dot)
-		precision(arg, len, in, f);
+		precision(arg, len, in);
 	else
-		zero_and_else(arg, in, tmplen, f);
-	return (0);
+		zero_and_else(arg, in, tmplen);
 }
 
-int	int_int(t_f *f, va_list ap)
+void	int_int(va_list ap)
 {
 	char	*in;
 	int		tmplen;
@@ -69,19 +70,19 @@ int	int_int(t_f *f, va_list ap)
 	{
 		print_sign(arg, f->plu, f->spc);
 		tmplen = f->pre - len;
-		ft_putcharn('0', tmplen);
-		ft_putstr(in);
+		addcharn('0', tmplen);
+		if (!(!f->pre && !arg))
+			vector = ft_vector(vector, in, 5, 0);
 	}
 	else if (f->min)
-		minus(arg, len, in, f);
+		minus(arg, len, in);
 	else if (f->dot)
-		precision(arg, len, in, f);
+		precision(arg, len, in);
 	else
-		zero_and_else(arg, in, tmplen, f);
-	return (0);
+		zero_and_else(arg, in, tmplen);
 }
 
-int	int_long(t_f *f, va_list ap)
+void	int_long(va_list ap)
 {
 	char	*in;
 	int		tmplen;
@@ -96,19 +97,19 @@ int	int_long(t_f *f, va_list ap)
 	{
 		print_sign(arg, f->plu, f->spc);
 		tmplen = f->pre - len;
-		ft_putcharn('0', tmplen);
-		ft_putstr(in);
+		addcharn('0', tmplen);
+		if (!(!f->pre && !arg))
+			vector = ft_vector(vector, in, 5, 0);
 	}
 	else if (f->min)
-		minus(arg, len, in, f);
+		minus(arg, len, in);
 	else if (f->dot)
-		precision(arg, len, in, f);
+		precision(arg, len, in);
 	else
-		zero_and_else(arg, in, tmplen, f);
-	return (0);
+		zero_and_else(arg, in, tmplen);
 }
 
-int	int_long_long(t_f *f, va_list ap)
+void	int_long_long(va_list ap)
 {
 	char		*in;
 	int			tmplen;
@@ -123,14 +124,14 @@ int	int_long_long(t_f *f, va_list ap)
 	{
 		print_sign(arg, f->plu, f->spc);
 		tmplen = f->pre - len;
-		ft_putcharn('0', tmplen);
-		ft_putstr(in);
+		addcharn('0', tmplen);
+		if (!(!f->pre && !arg))
+			vector = ft_vector(vector, in, 5, 0);
 	}
 	else if (f->min)
-		minus(arg, len, in, f);
+		minus(arg, len, in);
 	else if (f->dot)
-		precision(arg, len, in, f);
+		precision(arg, len, in);
 	else
-		zero_and_else(arg, in, tmplen, f);
-	return (0);
+		zero_and_else(arg, in, tmplen);
 }

@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int	character(t_f *f, va_list ap)
+void	character(va_list ap)
 {
 	char	c;
 
@@ -9,16 +9,15 @@ int	character(t_f *f, va_list ap)
 	{
 		if (f->min)
 		{
-			ft_putchar(c);
-			ft_putcharn(' ', (f->wid - 1));
+			vector = ft_vector(vector, &c, 5, 1);
+			addcharn(' ', (f->wid - 1));
 		}
 		else
 		{
-			ft_putcharn(' ', (f->wid - 1));
-			ft_putchar(c);
+			addcharn(' ', (f->wid - 1));
+			vector = ft_vector(vector, &c, 5, 1);
 		}
 	}
 	else
-		ft_putchar(c);
-	return (0);
+		vector = ft_vector(vector, &c, 5, 1);
 }

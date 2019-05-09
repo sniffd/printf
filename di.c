@@ -3,37 +3,38 @@
 void	print_sign(long long number, int plu, int spc)
 {
 	if (number < 0)
-		ft_putchar('-');
+		vector = ft_vector(vector, "-", 5, 0);
 	else if (plu)
-		ft_putchar('+');
+		vector = ft_vector(vector, "+", 5, 0);
 	else if (spc)
-		ft_putchar(' ');
+		vector = ft_vector(vector, " ", 5, 0);
 }
 
-void	minus(long long arg, int len, char *in, t_f *f)
+void	minus(long long arg, int len, char *in)
 {
 	int	tmplen;
 
 	print_sign(arg, f->plu, f->spc);
 	tmplen = f->pre - len;
+	oktotorp(arg, len);
 	if (tmplen <= 0)
 	{
-		ft_putstr(in);
+		vector = ft_vector(vector, in, 5, 0);
 		tmplen = (f->plu || f->spc || arg < 0) ? f->wid - len - 1 :
 			f->wid - len;
-		ft_putcharn(' ', tmplen);
+		addcharn(' ', tmplen);
 	}
 	else
 	{
-		ft_putcharn('0', tmplen);
-		ft_putstr(in);
+		addcharn('0', tmplen);
+		vector = ft_vector(vector, in, 5, 0);
 		tmplen = (f->plu || f->spc || arg < 0) ? f->wid - f->pre - 1 :
 			f->wid - f->pre;
-		ft_putcharn(' ', tmplen);
+		addcharn(' ', tmplen);
 	}
 }
 
-void	precision(long long arg, int len, char *in, t_f *f)
+void	precision(long long arg, int len, char *in)
 {
 	int	tmplen;
 
@@ -43,51 +44,56 @@ void	precision(long long arg, int len, char *in, t_f *f)
 	else
 		tmplen = (f->plu || f->spc || arg < 0) ? f->wid - len - 1 :
 			f->wid - len;
-	if (tmplen <= 0)
+	if (tmplen <= 0 && oktotorp(arg, len))
 	{
 		tmplen = f->pre - len;
 		print_sign(arg, f->plu, f->spc);
-		ft_putcharn('0', tmplen);
-		ft_putstr(in);
+		addcharn('0', tmplen);
+		vector = ft_vector(vector, in, 5, 0);
 	}
 	else
 	{
-		ft_putcharn(' ', tmplen);
+		addcharn(' ', tmplen);
 		tmplen = f->pre - len;
 		print_sign(arg, f->plu, f->spc);
-		ft_putcharn('0', tmplen);
+		oktotorp(arg, len);
+		addcharn('0', tmplen);
 		in = !(!f->pre && !arg) ? in : " ";
-		ft_putstr(in);
+		vector = ft_vector(vector, in, 5, 0);
 	}
 }
 
-void	zero_and_else(long long arg, char *in, int tmplen, t_f *f)
+void	zero_and_else(long long arg, char *in, int tmplen)
 {
+	int	len;
+
+	len = (int)ft_strlen(in);
 	if (f->zer && !(f->dot))
 	{
 		print_sign(arg, f->plu, f->spc);
-		ft_putcharn('0', tmplen);
-		ft_putstr(in);
+		oktotorp(arg, len);
+		addcharn('0', tmplen);
+		vector = ft_vector(vector, in, 5, 0);
 	}
 	else
 	{
-		ft_putcharn(' ', tmplen);
+		addcharn(' ', tmplen);
 		print_sign(arg, f->plu, f->spc);
-		ft_putstr(in);
+		oktotorp(arg, len);
+		vector = ft_vector(vector, in, 5, 0);
 	}
 }
 
-int		integer(t_f *f, va_list ap)
+void	integer(va_list ap)
 {
 	if (f->hh)
-		int_char(f, ap);
+		int_char(ap);
 	else if (f->h)
-		int_short(f, ap);
+		int_short(ap);
 	else if (f->ll)
-		int_long_long(f, ap);
+		int_long_long(ap);
 	else if (f->l)
-		int_long(f, ap);
+		int_long(ap);
 	else
-		int_int(f, ap);
-	return (0);
+		int_int(ap);
 }
