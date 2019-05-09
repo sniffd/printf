@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <string.h>
 # include <stdlib.h>
+# include <unistd.h>
 
 typedef struct	s_list
 {
@@ -97,6 +98,8 @@ void			*ft_memjoin(const void *s1, const void *s2, size_t l1,
 void			*ft_memfjoin(void **s1, const void *s2, size_t l1, size_t l2);
 void			*ft_memsub(char const *s, unsigned int start, size_t len);
 void			ft_putcharn(char c, ssize_t	n);
-char			*ft_vector(char *vector , const char *str, size_t i_size);
+char			*ft_vector(char *vector, const char *str, size_t i_size,
+		size_t len);
+char			*ft_strtolower(char *str);
 
 #endif
