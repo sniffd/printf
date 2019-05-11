@@ -7,19 +7,22 @@ void	string(va_list ap)
 
 	s = va_arg(ap, char *);
 	len = ft_strlen(s);
-	if (f->wid)
+	if (g_f->wid)
 	{
-		if (f->min)
+		if (g_f->min)
 		{
-			vector = ft_vector(vector, s, 5, 0);
-			addcharn(' ', (f->wid - len));
+			g_vector = ft_vector(g_vector, s, 5, 0);
+			addcharn(' ', (g_f->wid - len));
 		}
 		else
 		{
-			addcharn(' ', (f->wid - len));
-			vector = ft_vector(vector, s, 5, 0);
+			if (g_f->zer)
+				addcharn('0', (g_f->wid - len));
+			else
+				addcharn(' ', (g_f->wid - len));
+			g_vector = ft_vector(g_vector, s, 5, 0);
 		}
 	}
 	else
-		vector = ft_vector(vector, s, 5, 0);
+		g_vector = ft_vector(g_vector, s, 5, 0);
 }

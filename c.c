@@ -5,19 +5,22 @@ void	character(va_list ap)
 	char	c;
 
 	c = va_arg(ap, char);
-	if (f->wid)
+	if (g_f->wid)
 	{
-		if (f->min)
+		if (g_f->min)
 		{
-			vector = ft_vector(vector, &c, 5, 1);
-			addcharn(' ', (f->wid - 1));
+			g_vector = ft_vector(g_vector, &c, 5, 1);
+			addcharn(' ', (g_f->wid - 1));
 		}
 		else
 		{
-			addcharn(' ', (f->wid - 1));
-			vector = ft_vector(vector, &c, 5, 1);
+			if (g_f->zer)
+				addcharn('0', (g_f->wid - 1));
+			else
+				addcharn(' ', (g_f->wid - 1));
+			g_vector = ft_vector(g_vector, &c, 5, 1);
 		}
 	}
 	else
-		vector = ft_vector(vector, &c, 5, 1);
+		g_vector = ft_vector(g_vector, &c, 5, 1);
 }
