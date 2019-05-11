@@ -1,11 +1,11 @@
 #include "libft.h"
 
-char	*ft_itoa_base(unsigned int n, int base)
+char	*ft_itoa_base(unsigned long long int n, int base)
 {
-	char			*dic;
-	char			*res;
-	int				i;
-	unsigned int	nb;
+	char				*dic;
+	char				*res;
+	int					i;
+	unsigned long long	nb;
 
 	dic = ft_strdup("0123456789ABCDEF");
 	i = 1;
