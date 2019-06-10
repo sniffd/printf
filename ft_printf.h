@@ -1,8 +1,12 @@
 #ifndef FT_PRINTF_H
 #define FT_PRINTF_H
 
-#include "libft/libft.h"
+#include "./libft/libft.h"
 #include <stdarg.h>
+#include <limits.h>
+
+#define LIM 1000000000000000000
+#define DIV 1000000000000000000
 
 typedef	struct	s_f
 {
@@ -21,8 +25,29 @@ typedef	struct	s_f
 	int		wid;
 	char	f;
 }				t_f;
-extern char	*vector;
-extern t_f	*f;
+
+struct 			s_double
+{
+	size_t					m;
+	unsigned short			e:15;
+	char					s:1;
+};
+
+typedef union	u_double
+{
+	long double				d;
+	struct s_double			s;
+}				t_double;
+
+typedef struct	s_bigint
+{
+	size_t	*num;
+	int		len;
+	int		start;
+}				t_bigint;
+
+extern char	*g_vector;
+extern t_f	*g_f;
 void	addcharn(char c, ssize_t n);
 int	ft_printf(const char *format, ...);
 t_f	*parse(const char **s, va_list ap);
@@ -57,5 +82,8 @@ void hex(va_list ap);
 void big_hex(va_list ap);
 void string(va_list ap);
 void character(va_list ap);
+t_bigint	get_fraction(size_t man, int pow);
+t_bigint	get_whole(size_t man, int pow);
+void	f_long_double(long double ld);
 
 #endif
