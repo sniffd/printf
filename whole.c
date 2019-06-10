@@ -131,9 +131,49 @@ static t_bigint	bigint_add(t_bigint a, t_bigint b)
 	return (res);
 }
 
+static t_bigint	bigint_multy_two(t_bigint b)
+{
+	t_bigint	res;
+	int			i;
+
+	res.len = b.start + 2;
+	res.num = (size_t *)ft_memalloc(sizeof(size_t) * res.len);
+	res.start = b.start;
+	i = b.start;
+	while (i >= 0)
+	{
+		res.num[i] = (b.num[i]) << 1;
+		if (res.num[i] > LIM)
+		{
+			res.num[i + 1] = res.num[i + 1] + (res.num[i] / DIV);
+			res.num[i] = res.num[i] % DIV;
+			if (i + 1 > res.start)
+				res.start++;
+		}
+		i--;
+	}
+////		printf("\n%i: ", p);
+//		ft_putchar('\n');
+//		for (int j = b.start; j >= 0; j--)
+//		{
+//			int h;
+//			if (((h = ft_numlen(b.num[j])) < 18) && j != b.start)
+//			{
+//				h = 18 - h;
+//				while (h--)
+////					printf("0");
+//					ft_putchar('0');
+//			}
+////			printf("%zu", b.num[j]);
+//			ft_putnbr(b.num[j]);
+//		}
+	return (res);
+}
+
 t_bigint	get_whole(size_t man, int pow)
 {
 	t_bigint	res;
+	t_bigint	two;
 	size_t	mant;
 	char	bit;
 
@@ -142,14 +182,15 @@ t_bigint	get_whole(size_t man, int pow)
 	res.start = 0;
 	mant = man;
 	pow = pow - 63;
+	two = pow_of_two(pow);
 	while (mant)
 	{
 		bit = mant & 1;
 		if (bit)
-			res = bigint_add(res, pow_of_two(pow));
+			res = bigint_add(res, two);
 		mant >>= 1;
 		pow++;
-
+		two = bigint_multy_two(two);
 	}
 	//		printf("\n%i: ", p);
 		ft_putchar('\n');
