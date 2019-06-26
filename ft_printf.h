@@ -5,8 +5,10 @@
 #include <stdarg.h>
 #include <limits.h>
 
-#define LIM 1000000000000000000
+//#define LIM 1000000000000000000
+#define LIM 2000000000000000000
 #define DIV 1000000000000000000
+#define ZERO 1000000000000000000
 
 typedef	struct	s_f
 {
