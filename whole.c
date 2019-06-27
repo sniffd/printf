@@ -10,38 +10,29 @@ static t_bigint	pow_of_two(int pow)
 	p = 0;
 	b.len = pow / 59 + 1;
 	b.num = (size_t *)ft_memalloc(sizeof(size_t) * b.len);
-	b.num[0] = 1;
+	b.num[0] = ZERO + 1;
 	b.start = 0;
+	i = 1;
+	while (i < b.len)
+	{
+		b.num[i] = ZERO;
+		i++;
+	}
 	while (p < pow)
 	{
 		i = b.start;
 		while (i >= 0)
 		{
-			b.num[i] <<= 1;
-			if (b.num[i] > LIM)
+			b.num[i] = ((b.num[i] - ZERO) << 1) + ZERO;
+			if (b.num[i] >= LIM)
 			{
-				b.num[i + 1] = b.num[i + 1] + (b.num[i] / DIV);
-				b.num[i] = b.num[i] % DIV;
+				b.num[i + 1] = (b.num[i + 1] - ZERO) + ((b.num[i] - ZERO) / DIV) + ZERO;
+				b.num[i] = (b.num[i] - ZERO) % DIV + ZERO;
 				if (i + 1 > b.start)
 					b.start++;
 			}
 			i--;
 		}
-////		printf("\n%i: ", p);
-//		ft_putchar('\n');
-//		for (int j = b.start; j >= 0; j--)
-//		{
-//			int h;
-//			if (((h = ft_numlen(b.num[j])) < 18) && j != b.start)
-//			{
-//				h = 18 - h;
-//				while (h--)
-////					printf("0");
-//					ft_putchar('0');
-//			}
-////			printf("%zu", b.num[j]);
-//			ft_putnbr(b.num[j]);
-//		}
 		p++;
 	}
 	return (b);
@@ -62,16 +53,22 @@ static t_bigint	bigint_add(t_bigint a, t_bigint b)
 	res.len = biggestlen;
 	i = 0;
 	res.start = 0;
+	while (i < res.len)
+	{
+		res.num[i] = ZERO;
+		i++;
+	}
+	i = 0;
 	while (i < biggestlen)
 	{
 		if (i < lowestlen)
-			res.num[i] = res.num[i] + a.num[i] + b.num[i];
+			res.num[i] = (res.num[i] - ZERO) + (a.num[i] - ZERO) + (b.num[i] - ZERO) + ZERO;
 		else
-			res.num[i] = (biggest == 'a' ? res.num[i] + a.num[i] : res.num[i] + b.num[i]);
+			res.num[i] = (biggest == 'a' ? ((res.num[i] - ZERO) + (a.num[i] - ZERO) + ZERO) : ((res.num[i] - ZERO) + (b.num[i] - ZERO) + ZERO));
 		if (res.num[i] > LIM)
 		{
-			res.num[i + 1] = res.num[i + 1] + (res.num[i] / DIV);
-			res.num[i] = res.num[i] % DIV;
+			res.num[i + 1] = (res.num[i + 1] - ZERO) + ((res.num[i] - ZERO) / DIV) + ZERO;
+			res.num[i] = (res.num[i] - ZERO) % DIV + ZERO;
 			if (i + 1 > res.start)
 				res.start++;
 			if (i + 1 == biggestlen)
@@ -81,53 +78,6 @@ static t_bigint	bigint_add(t_bigint a, t_bigint b)
 			res.start++;
 		i++;
 	}
-//	printf("\n%s:   ", "a");
-////		ft_putchar('\n');
-//	for (int j = a.start; j >= 0; j--)
-//	{
-//		int h;
-//		if (((h = ft_numlen(a.num[j])) < 18) && j != a.start)
-//		{
-//			h = 18 - h;
-//			while (h--)
-//				printf("0");
-////					ft_putchar('0');
-//		}
-//		printf("%zu", a.num[j]);
-////			ft_putnbr(res.num[j]);
-//	}
-//	printf("\n%s:   ", "b");
-////		ft_putchar('\n');
-//	for (int j = b.start; j >= 0; j--)
-//	{
-//		int h;
-//		if (((h = ft_numlen(b.num[j])) < 18) && j != b.start)
-//		{
-//			h = 18 - h;
-//			while (h--)
-//				printf("0");
-////					ft_putchar('0');
-//		}
-//		printf("%zu", b.num[j]);
-////			ft_putnbr(res.num[j]);
-//	}
-//	printf("\n%s: ", "res");
-////		ft_putchar('\n');
-//	for (int j = res.start; j >= 0; j--)
-//	{
-//		int h;
-//		if (((h = ft_numlen(res.num[j])) < 18) && j != res.start)
-//		{
-//			h = 18 - h;
-//			while (h--)
-//				printf("0");
-////					ft_putchar('0');
-//		}
-//		printf("%zu", res.num[j]);
-////			ft_putnbr(res.num[j]);
-//	}
-//	free(a.num);
-//	free(b.num);
 	return (res);
 }
 
@@ -139,34 +89,26 @@ static t_bigint	bigint_multy_two(t_bigint b)
 	res.len = b.start + 2;
 	res.num = (size_t *)ft_memalloc(sizeof(size_t) * res.len);
 	res.start = b.start;
+	i = b.start + 1;
+	while (i >= 0)
+	{
+		res.num[i] = ZERO;
+		i--;
+	}
 	i = b.start;
 	while (i >= 0)
 	{
-		res.num[i] = (b.num[i]) << 1;
+		res.num[i] = ((b.num[i] - ZERO) << 1) + ZERO;
 		if (res.num[i] > LIM)
 		{
-			res.num[i + 1] = res.num[i + 1] + (res.num[i] / DIV);
-			res.num[i] = res.num[i] % DIV;
+			res.num[i + 1] = (res.num[i + 1] - ZERO) + ((res.num[i] - ZERO) / DIV) + ZERO;
+			res.num[i] = (res.num[i] - ZERO) % DIV + ZERO;
 			if (i + 1 > res.start)
 				res.start++;
 		}
 		i--;
 	}
-////		printf("\n%i: ", p);
-//		ft_putchar('\n');
-//		for (int j = b.start; j >= 0; j--)
-//		{
-//			int h;
-//			if (((h = ft_numlen(b.num[j])) < 18) && j != b.start)
-//			{
-//				h = 18 - h;
-//				while (h--)
-////					printf("0");
-//					ft_putchar('0');
-//			}
-////			printf("%zu", b.num[j]);
-//			ft_putnbr(b.num[j]);
-//		}
+	free(b.num);
 	return (res);
 }
 
@@ -180,6 +122,7 @@ t_bigint	get_whole(size_t man, int pow)
 	res.num = (size_t *)ft_memalloc(8);
 	res.len = 0;
 	res.start = 0;
+	res.num[0] = ZERO;
 	mant = man;
 	pow = pow - 63;
 	two = pow_of_two(pow);
@@ -192,19 +135,10 @@ t_bigint	get_whole(size_t man, int pow)
 		pow++;
 		two = bigint_multy_two(two);
 	}
-	//		printf("\n%i: ", p);
+	res.num[res.start] -= ZERO;
 		ft_putchar('\n');
 		for (int j = res.start; j >= 0; j--)
 		{
-			int h;
-			if (((h = ft_numlen(res.num[j])) < 18) && j != res.start)
-			{
-				h = 18 - h;
-				while (h--)
-//					printf("0");
-					ft_putchar('0');
-			}
-//			printf("%zu", res.num[j]);
 			ft_putnbr(res.num[j]);
 		}
 	return (res);
