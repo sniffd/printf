@@ -73,7 +73,8 @@ t_f			*parse(const char **s, va_list ap)
 		return (0);
 	zone = 0;
 	while (*S != 'd' && *S != 'i' && *S != 'o' && *S != 'u' && *S != 'x' &&
-	*S != 'X' && *S != 'f' && *S != 'c' && *S != 's' && *S != 'p' && *S != '%')
+	*S != 'X' && *S != 'f' && *S != 'c' && *S != 's' && *S != 'p' &&
+	*S != '%' && *S != 'C')
 	{
 		zone = parse_zone(*S, zone);
 		if (zone == 0)

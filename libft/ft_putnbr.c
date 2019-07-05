@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	ft_putnbr(int n)
+void	ft_putnbr(size_t n)
 {
 	if (n == -2147483648)
 		ft_putstr("-2147483648");
@@ -23,7 +23,7 @@ void	ft_putnbr(int n)
 	}
 	else if (n > 9)
 	{
-		ft_putnbr((int)(n / 10));
+		ft_putnbr((size_t)(n / 10));
 		ft_putchar(ft_abs(n % 10) + '0');
 	}
 	else

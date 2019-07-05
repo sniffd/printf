@@ -2,13 +2,13 @@
 
 void	big_hex(va_list ap)
 {
-	if (f->hh)
+	if (g_f->hh)
 		big_x_char(ap);
-	else if (f->h)
+	else if (g_f->h)
 		big_x_short(ap);
-	else if (f->ll)
+	else if (g_f->ll)
 		big_x_long_long(ap);
-	else if (f->l)
+	else if (g_f->l)
 		big_x_long(ap);
 	else
 		big_x_int(ap);
@@ -16,13 +16,13 @@ void	big_hex(va_list ap)
 
 void	hex(va_list ap)
 {
-	if (f->hh)
+	if (g_f->hh)
 		x_char(ap);
-	else if (f->h)
+	else if (g_f->h)
 		x_short(ap);
-	else if (f->ll)
+	else if (g_f->ll)
 		x_long_long(ap);
-	else if (f->l)
+	else if (g_f->l || g_f->f == 'p')
 		x_long(ap);
 	else
 		x_int(ap);

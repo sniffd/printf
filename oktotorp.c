@@ -2,20 +2,20 @@
 
 int	oktotorp(unsigned long long arg, int len)
 {
-	if (f->okt)
+	if (g_f->okt || g_f->f == 'p')
 	{
-		if (f->f == 'x')
+		if (g_f->f == 'x' || g_f->f == 'p')
+		{
+			if (arg || g_f->f == 'p')
+				g_vector = ft_vector(g_vector, "0x", 5, 0);
+		}
+		else if (g_f->f == 'X')
 		{
 			if (arg)
-				vector = ft_vector(vector, "0x", 5, 0);
+				g_vector = ft_vector(g_vector, "0X", 5, 0);
 		}
-		else if (f->f == 'X')
-		{
-			if (arg)
-				vector = ft_vector(vector, "0X", 5, 0);
-		}
-		else if (f->f == 'o' && (f->dot || (f->dot = 2)))
-			f->pre = f->pre > len || arg == 0 ? f->pre : len + 1;
+		else if (g_f->f == 'o' && (g_f->dot || (g_f->dot = 2)))
+			g_f->pre = g_f->pre > len || arg == 0 ? g_f->pre : len + 1;
 	}
 	return (1);
 }

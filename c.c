@@ -4,7 +4,7 @@ void	character(va_list ap)
 {
 	char	c;
 
-	c = va_arg(ap, char);
+	c = (char)va_arg(ap, int);
 	if (g_f->wid)
 	{
 		if (g_f->min)

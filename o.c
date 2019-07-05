@@ -2,13 +2,13 @@
 
 void octal(va_list ap)
 {
-	if (f->hh)
+	if (g_f->hh)
 		o_char(ap);
-	else if (f->h)
+	else if (g_f->h)
 		o_short(ap);
-	else if (f->ll)
+	else if (g_f->ll)
 		o_long_long(ap);
-	else if (f->l)
+	else if (g_f->l)
 		o_long(ap);
 	else
 		o_int(ap);

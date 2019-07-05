@@ -3,33 +3,33 @@
 void	print_sign(long long number, int plu, int spc)
 {
 	if (number < 0)
-		vector = ft_vector(vector, "-", 5, 0);
+		g_vector = ft_vector(g_vector, "-", 5, 0);
 	else if (plu)
-		vector = ft_vector(vector, "+", 5, 0);
+		g_vector = ft_vector(g_vector, "+", 5, 0);
 	else if (spc)
-		vector = ft_vector(vector, " ", 5, 0);
+		g_vector = ft_vector(g_vector, " ", 5, 0);
 }
 
 void	minus(long long arg, int len, char *in)
 {
 	int	tmplen;
 
-	print_sign(arg, f->plu, f->spc);
-	tmplen = f->pre - len;
+	print_sign(arg, g_f->plu, g_f->spc);
+	tmplen = g_f->pre - len;
 	oktotorp(arg, len);
 	if (tmplen <= 0)
 	{
-		vector = ft_vector(vector, in, 5, 0);
-		tmplen = (f->plu || f->spc || arg < 0) ? f->wid - len - 1 :
-			f->wid - len;
+		g_vector = ft_vector(g_vector, in, 5, 0);
+		tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1 :
+			g_f->wid - len;
 		addcharn(' ', tmplen);
 	}
 	else
 	{
 		addcharn('0', tmplen);
-		vector = ft_vector(vector, in, 5, 0);
-		tmplen = (f->plu || f->spc || arg < 0) ? f->wid - f->pre - 1 :
-			f->wid - f->pre;
+		g_vector = ft_vector(g_vector, in, 5, 0);
+		tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - g_f->pre - 1 :
+			g_f->wid - g_f->pre;
 		addcharn(' ', tmplen);
 	}
 }
@@ -38,28 +38,28 @@ void	precision(long long arg, int len, char *in)
 {
 	int	tmplen;
 
-	if (f->pre >= len)
-		tmplen = (f->plu || f->spc || arg < 0) ? f->wid - f->pre - 1 :
-			f->wid - f->pre;
+	if (g_f->pre >= len)
+		tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - g_f->pre - 1 :
+			g_f->wid - g_f->pre;
 	else
-		tmplen = (f->plu || f->spc || arg < 0) ? f->wid - len - 1 :
-			f->wid - len;
+		tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1 :
+			g_f->wid - len;
 	if (tmplen <= 0 && oktotorp(arg, len))
 	{
-		tmplen = f->pre - len;
-		print_sign(arg, f->plu, f->spc);
+		tmplen = g_f->pre - len;
+		print_sign(arg, g_f->plu, g_f->spc);
 		addcharn('0', tmplen);
-		vector = ft_vector(vector, in, 5, 0);
+		g_vector = ft_vector(g_vector, in, 5, 0);
 	}
 	else
 	{
 		addcharn(' ', tmplen);
-		tmplen = f->pre - len;
-		print_sign(arg, f->plu, f->spc);
+		tmplen = g_f->pre - len;
+		print_sign(arg, g_f->plu, g_f->spc);
 		oktotorp(arg, len);
 		addcharn('0', tmplen);
-		in = !(!f->pre && !arg) ? in : " ";
-		vector = ft_vector(vector, in, 5, 0);
+		in = !(!g_f->pre && !arg) ? in : " ";
+		g_vector = ft_vector(g_vector, in, 5, 0);
 	}
 }
 
@@ -68,31 +68,31 @@ void	zero_and_else(long long arg, char *in, int tmplen)
 	int	len;
 
 	len = (int)ft_strlen(in);
-	if (f->zer && !(f->dot))
+	if (g_f->zer && !(g_f->dot))
 	{
-		print_sign(arg, f->plu, f->spc);
+		print_sign(arg, g_f->plu, g_f->spc);
 		oktotorp(arg, len);
 		addcharn('0', tmplen);
-		vector = ft_vector(vector, in, 5, 0);
+		g_vector = ft_vector(g_vector, in, 5, 0);
 	}
 	else
 	{
 		addcharn(' ', tmplen);
-		print_sign(arg, f->plu, f->spc);
+		print_sign(arg, g_f->plu, g_f->spc);
 		oktotorp(arg, len);
-		vector = ft_vector(vector, in, 5, 0);
+		g_vector = ft_vector(g_vector, in, 5, 0);
 	}
 }
 
 void	integer(va_list ap)
 {
-	if (f->hh)
+	if (g_f->hh)
 		int_char(ap);
-	else if (f->h)
+	else if (g_f->h)
 		int_short(ap);
-	else if (f->ll)
+	else if (g_f->ll)
 		int_long_long(ap);
-	else if (f->l)
+	else if (g_f->l)
 		int_long(ap);
 	else
 		int_int(ap);

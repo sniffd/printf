@@ -1,7 +1,7 @@
 #include "ft_printf.h"
 
-char	*vector = NULL;
-t_f		*f = NULL;
+char	*g_vector = NULL;
+t_f		*g_f = NULL;
 
 int	ft_printf(const char *format, ...)
 {
@@ -14,30 +14,33 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			f = parse(&format, ap);
-			if (f->f == 'i' || f->f == 'd')
+			g_f = parse(&format, ap);
+			if (g_f->f == 'i' || g_f->f == 'd')
 				integer(ap);
-			else if (f->f == 'o')
+			else if (g_f->f == 'o')
 				octal(ap);
-			else if (f->f == 's')
+			else if (g_f->f == 's')
 				string(ap);
-			else if (f->f == 'c')
+			else if (g_f->f == 'c' || g_f->f == 'C')
 				character(ap);
-			else if (f->f == 'X')
+			else if (g_f->f == 'X')
 				big_hex(ap);
-			else if (f->f == 'x')
+			else if (g_f->f == 'x' || g_f->f == 'p')
 				hex(ap);
+			else if (g_f->f == 'f')
+				f_f(ap);
 		}
 		else
 		{
-			vector = ft_vector(vector, format, 5, 1);
+			g_vector = ft_vector(g_vector, format, 5, 1);
 			format++;
 		}
 	}
 	va_end(ap);
-	len = ft_strlen(vector);
-	write(1, vector, len);
-	ft_strdel(&vector);
+	len = ft_strlen(g_vector);
+	write(1, g_vector, len);
+	if (g_vector)
+		ft_strdel(&g_vector);
 	return (len);
 }
 //%[флаги][ширина][.точность][размер]тип

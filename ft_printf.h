@@ -9,6 +9,7 @@
 #define LIM 2000000000000000000
 #define DIV 1000000000000000000
 #define ZERO 1000000000000000000
+#define CLUSTER_SIZE 18
 
 typedef	struct	s_f
 {
@@ -86,6 +87,7 @@ void string(va_list ap);
 void character(va_list ap);
 t_bigint	get_fraction(size_t man, int pow);
 t_bigint	get_whole(size_t man, int pow);
-void	f_long_double(long double ld);
+void	f_long_double(va_list ap);
+void	f_f(va_list ap);
 
 #endif

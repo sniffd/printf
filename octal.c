@@ -10,18 +10,18 @@ void	o_char(va_list ap)
 	arg = (unsigned char)va_arg(ap, unsigned int);
 	in = ft_itoa_base(arg, 8);
 	len = (int)ft_strlen(in);
-	tmplen = (f->plu || f->spc) ? f->wid - len - 1 : f->wid - len;
+	tmplen = (g_f->plu || g_f->spc) ? g_f->wid - len - 1 : g_f->wid - len;
 	oktotorp(arg, len);
 	if (tmplen <= 0)
 	{
-		tmplen = f->pre - len;
+		tmplen = g_f->pre - len;
 		addcharn('0', tmplen);
-		if (!(!f->pre && !arg))
-			vector = ft_vector(vector, in, 5, 0);
+		if (!(!g_f->pre && !arg))
+			g_vector = ft_vector(g_vector, in, 5, 0);
 	}
-	else if (f->min)
+	else if (g_f->min)
 		minus(arg, len, in);
-	else if (f->dot)
+	else if (g_f->dot)
 		precision(arg, len, in);
 	else
 		zero_and_else(arg, in, tmplen);
@@ -37,18 +37,18 @@ void	o_short(va_list ap)
 	arg = (unsigned short)va_arg(ap, unsigned int);
 	in = ft_itoa_base(arg, 8);
 	len = (int)ft_strlen(in);
-	tmplen = (f->plu || f->spc) ? f->wid - len - 1 : f->wid - len;
+	tmplen = (g_f->plu || g_f->spc) ? g_f->wid - len - 1 : g_f->wid - len;
 	oktotorp(arg, len);
 	if (tmplen <= 0)
 	{
-		tmplen = f->pre - len;
+		tmplen = g_f->pre - len;
 		addcharn('0', tmplen);
-		if (!(!f->pre && !arg))
-			vector = ft_vector(vector, in, 5, 0);
+		if (!(!g_f->pre && !arg))
+			g_vector = ft_vector(g_vector, in, 5, 0);
 	}
-	else if (f->min)
+	else if (g_f->min)
 		minus(arg, len, in);
-	else if (f->dot)
+	else if (g_f->dot)
 		precision(arg, len, in);
 	else
 		zero_and_else(arg, in, tmplen);
@@ -64,18 +64,18 @@ void	o_int(va_list ap)
 	arg = va_arg(ap, unsigned int);
 	in = ft_itoa_base(arg, 8);
 	len = (int)ft_strlen(in);
-	tmplen = (f->plu || f->spc) ? f->wid - len - 1 : f->wid - len;
+	tmplen = (g_f->plu || g_f->spc) ? g_f->wid - len - 1 : g_f->wid - len;
 	oktotorp(arg, len);
 	if (tmplen <= 0)
 	{
-		tmplen = f->pre - len;
+		tmplen = g_f->pre - len;
 		addcharn('0', tmplen);
-		if (!(f->dot == 1 && !f->pre && !arg))
-			vector = ft_vector(vector, in, 5, 0);
+		if (!(g_f->dot == 1 && !g_f->pre && !arg))
+			g_vector = ft_vector(g_vector, in, 5, 0);
 	}
-	else if (f->min)
+	else if (g_f->min)
 		minus(arg, len, in);
-	else if (f->dot)
+	else if (g_f->dot)
 		precision(arg, len, in);
 	else
 		zero_and_else(arg, in, tmplen);
@@ -91,18 +91,18 @@ void	o_long(va_list ap)
 	arg = va_arg(ap, unsigned long);
 	in = ft_itoa_base(arg, 8);
 	len = (int)ft_strlen(in);
-	tmplen = (f->plu || f->spc) ? f->wid - len - 1 : f->wid - len;
+	tmplen = (g_f->plu || g_f->spc) ? g_f->wid - len - 1 : g_f->wid - len;
 	oktotorp(arg, len);
 	if (tmplen <= 0)
 	{
-		tmplen = f->pre - len;
+		tmplen = g_f->pre - len;
 		addcharn('0', tmplen);
-		if (!(!f->pre && !arg))
-			vector = ft_vector(vector, in, 5, 0);
+		if (!(!g_f->pre && !arg))
+			g_vector = ft_vector(g_vector, in, 5, 0);
 	}
-	else if (f->min)
+	else if (g_f->min)
 		minus(arg, len, in);
-	else if (f->dot)
+	else if (g_f->dot)
 		precision(arg, len, in);
 	else
 		zero_and_else(arg, in, tmplen);
@@ -118,18 +118,18 @@ void	o_long_long(va_list ap)
 	arg = va_arg(ap, unsigned long long);
 	in = ft_itoa_base(arg, 8);
 	len = (int)ft_strlen(in);
-	tmplen = (f->plu || f->spc) ? f->wid - len - 1 : f->wid - len;
+	tmplen = (g_f->plu || g_f->spc) ? g_f->wid - len - 1 : g_f->wid - len;
 	oktotorp(arg, len);
 	if (tmplen <= 0)
 	{
-		tmplen = f->pre - len;
+		tmplen = g_f->pre - len;
 		addcharn('0', tmplen);
-		if (!(!f->pre && !arg))
-			vector = ft_vector(vector, in, 5, 0);
+		if (!(!g_f->pre && !arg))
+			g_vector = ft_vector(g_vector, in, 5, 0);
 	}
-	else if (f->min)
+	else if (g_f->min)
 		minus(arg, len, in);
-	else if (f->dot)
+	else if (g_f->dot)
 		precision(arg, len, in);
 	else
 		zero_and_else(arg, in, tmplen);

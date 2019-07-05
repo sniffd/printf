@@ -3,6 +3,7 @@
 
 void	int_test(void)
 {
+	char *s;
 	printf("%i\n", printf("% 20.10i\n", -100));
 	printf("%i\n", ft_printf("% 20.10i\n", -100));
 	printf("%i\n", printf("% 20.10i\n", 100));
@@ -30,7 +31,7 @@ void	int_test(void)
 	printf("%i\n", printf("%+d\n", 12));
 	printf("%i\n", ft_printf("%+d\n", 12));
 	printf("%i\n", printf("%010d\n", 12));
-	printf("%i\n", ft_printf("%010d\n", 12));
+	printf("%i\n", ft_printf("%010qd\n", 12));
 	printf("%i\n", printf("%-10d\n", 12));
 	printf("%i\n", ft_printf("%-10d\n", 12));
 	printf("%i\n", printf("%-+10d\n", 12));
@@ -105,4 +106,11 @@ void	int_test(void)
 	printf("%i\n", ft_printf("%#08x\n", 0));
 	printf("%i\n", printf("%#-08x\n", 0));
 	printf("%i\n", ft_printf("%#-08x\n", 0));
+	printf("%.50p\n", &s);
+	ft_printf("%.50p\n", &s);
+//	printf("%#lx\n", &s);
+	printf("%.20c\n", 'a');
+	ft_printf("%.20c\n", 'a');
+	printf("%.20s\n", "a");
+	ft_printf("%.20s\n", "a");
 }
