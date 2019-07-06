@@ -13,14 +13,15 @@ void	fraction_round(t_bigint f)
 	int i;
 	int pre;
 
-	i = f.start;
-	pre = g_f->pre - ft_numlen(f.num[i]);
-//	if (i > 0)
-//		index = i - (pre / CLUSTER_SIZE);
-//	else
-//		index = i;
-//	index = f.start - g_f->pre / CLUSTER_SIZE;
-	index = f.start - (g_f->pre - ft_numlen(f.num[f.start])) / 19 - 1;
+	pre = ((g_f->pre - (ft_numlen(f.num[f.start]) - 1) > 0) ? g_f->pre - (ft_numlen(f.num[f.start]) - 1) : 0);
+	if (pre == 0)
+		index = f.start;
+	else
+		index = f.start - (pre / 18 + 1);
+//	a = g_f->pre / 19;
+//	b =
+//	a = g_f->pre - ft_numlen(f.num[f.start]);
+//	b = (a > 0 ? (a / 19 + 1) : 0);
 //	digit = g_f->pre % CLUSTER_SIZE + 1;
 //	digit = CLUSTER_SIZE + 1 - ((((index - 1) * CLUSTER_SIZE) + ft_numlen(f.num[f.start])) - g_f->pre);
 	digit = CLUSTER_SIZE - ((CLUSTER_SIZE * (f.start - index) + ft_numlen(f.num[f.start])) - g_f->pre) + 1;
