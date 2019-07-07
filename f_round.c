@@ -9,25 +9,26 @@ void	whole_round(t_bigint w, t_bigint f)
 void	fraction_round(t_bigint f)
 {
 	int	index;
-	int	digit;
-	int i;
+	int digit;
 	int pre;
+	int start_len;
 
-	pre = ((g_f->pre - (ft_numlen(f.num[f.start]) - 1) > 0) ? g_f->pre - (ft_numlen(f.num[f.start]) - 1) : 0);
-	if (pre == 0)
-		index = f.start;
+	start_len = ft_numlen(f.num[f.start]) - 1;
+	pre = ((g_f->pre - start_len > 0) ? g_f->pre - start_len : 0);
+	index = f.start - (pre / CLUSTER_SIZE + ((pre % CLUSTER_SIZE != 0) * 1));
+//	pre = ft_numlen(f.num[index]) - 1;
+	if (index == f.start)
+		digit = g_f->pre % (start_len + 1);
+	else if (g_f->pre < CLUSTER_SIZE)
+		digit = (g_f->pre - start_len) % CLUSTER_SIZE;
 	else
-		index = f.start - (pre / 18 + 1);
-//	a = g_f->pre / 19;
-//	b =
-//	a = g_f->pre - ft_numlen(f.num[f.start]);
-//	b = (a > 0 ? (a / 19 + 1) : 0);
-//	digit = g_f->pre % CLUSTER_SIZE + 1;
-//	digit = CLUSTER_SIZE + 1 - ((((index - 1) * CLUSTER_SIZE) + ft_numlen(f.num[f.start])) - g_f->pre);
-	digit = CLUSTER_SIZE - ((CLUSTER_SIZE * (f.start - index) + ft_numlen(f.num[f.start])) - g_f->pre) + 1;
-//	digit = (g_f->pre - ft_numlen(f.num[f.start])) % CLUSTER_SIZE;
-	printf("\nindex %i\n", index);
-	printf("digit %i\n", digit);
+	{
+		digit = (g_f->pre - start_len) % CLUSTER_SIZE;
+		if (digit == 0)
+			digit = 18;
+	}
+//	printf("\nindex %i\n", index);
+//	printf("digit %i\n", digit);
 }
 
 void	f_round(t_bigint w, t_bigint f)
