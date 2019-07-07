@@ -89,5 +89,6 @@ t_bigint	get_fraction(size_t man, int pow);
 t_bigint	get_whole(size_t man, int pow);
 void	f_long_double(va_list ap);
 void	f_f(va_list ap);
+t_bigint	check_overflow_five(t_bigint b, int i, int d);
 
 #endif
