@@ -49,6 +49,14 @@ typedef struct	s_bigint
 	int		start;
 }				t_bigint;
 
+typedef struct	s_round
+{
+	int	index;
+	int	nmb_pos;
+	int next_digit;
+	size_t	mask;
+}				t_round;
+
 extern char	*g_vector;
 extern t_f	*g_f;
 void	addcharn(char c, ssize_t n);

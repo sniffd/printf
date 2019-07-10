@@ -1,176 +1,158 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-void	math_round(t_bigint f, t_bigint w, int index, int digit, size_t mask,
-				   int next_number, char fl)
+size_t	get_mask(int i)
 {
-	if (next_number > 4)
+	size_t	mask[19];
+
+	mask[1] = 10;
+	mask[2] = 100;
+	mask[3] = 1000;
+	mask[4] = 10000;
+	mask[5] = 100000;
+	mask[6] = 1000000;
+	mask[7] = 10000000;
+	mask[8] = 100000000;
+	mask[9] = 1000000000;
+	mask[10] = 10000000000;
+	mask[11] = 100000000000;
+	mask[12] = 1000000000000;
+	mask[13] = 10000000000000;
+	mask[14] = 100000000000000;
+	mask[15] = 1000000000000000;
+	mask[16] = 10000000000000000;
+	mask[17] = 100000000000000000;
+	mask[18] = 1000000000000000000;
+	return (mask[i]);
+}
+
+void	math_round(t_bigint b, t_round r, char flag)
+{
+	if (r.next_digit > 4)
 	{
-		f.num[index] = !fl ? f.num[index] + 1 : f.num[index] + mask;
-		f = check_overflow_five(f, index, 255);
+		b.num[r.index] = !flag ? b.num[r.index] + 1 : b.num[r.index] + r.mask;
+		b = check_overflow_five(b, r.index, 255);
 	}
 	ft_putchar('\n');
-	for (int j = f.start; j >= 0; j--)
+	for (int j = b.start; j >= 0; j--)
 	{
-		ft_putnbr(f.num[j]);
+		ft_putnbr(b.num[j]);
 		ft_putchar('_');
 	}
 	printf("hueta\n");
 }
 
-void	printf_round(t_bigint f, t_bigint w, int index, int digit, size_t mask,
-					 char fl)
+void	printf_round(t_bigint b, int index, size_t mask, char flag)
 {
 	size_t	number;
 
-	if (!fl)
-		number = f.num[0];
+	if (!flag)
+		number = b.num[0];
 	else
-		number = f.num[index] / mask % 10;
+		number = b.num[index] / mask % 10;
 	if (number % 2 == 1)
 	{
-		f.num[index] = !fl ? f.num[index] + 1 : f.num[index] + mask;
-		f = check_overflow_five(f, index, 255);
+		b.num[index] = !flag ? b.num[index] + 1 : b.num[index] + mask;
+		b = check_overflow_five(b, index, 255);
 	}
 	ft_putchar('\n');
-	for (int j = f.start; j >= 0; j--)
+	for (int j = b.start; j >= 0; j--)
 	{
-		ft_putnbr(f.num[j]);
+		ft_putnbr(b.num[j]);
 		ft_putchar('_');
 	}
 	printf("zaebumba\n");
 }
 
-void	check_zero(t_bigint f, t_bigint w, int index, int digit, int len, size_t mask,
-				   int next_number, char fl)
+void	check_zero(t_bigint f, t_round r, int len, char flag)
 {
 	int	i;
-//	size_t	mask;
-	int	flg;
 
-	i = index;
-	flg = 0;
-//	mask = 1;
-	if (digit == len)
-	{
-		while (i >= 0 && !(f.num[--i] - ZERO))
-			;
-		if (i >= 0)
-			math_round(f, w, index, digit, mask, next_number, fl);
-		else
-			printf_round(f, w, index, digit, mask, fl);
-	}
+	i = r.index;
+	if (r.nmb_pos != len && f.num[r.index] % (r.mask / 10))
+		math_round(f, r, flag);
 	else
 	{
-//		while (flg != len - digit - 1)
-//		{
-//			mask *= 10;
-//			flg++;
-//		}
-		if (f.num[index] % (mask / 10))
-			math_round(f, w, index, digit, mask, next_number, fl);
-		else
+		while (i >= 0)
 		{
-			while (i >= 0 && !(f.num[--i] - ZERO))
-				;
-			if (i >= 0)
-				math_round(f, w, index, digit, mask, next_number, fl);
-			else
-				printf_round(f, w, index, digit, mask, fl);
+			if ((f.num[--i] - ZERO))
+			{
+				math_round(f, r, flag);
+				return ;
+			}
 		}
+		printf_round(f, r.index, r.mask, flag);
 	}
-//		if (f.start != index && index > 0 && f.num[index - 1] - ZERO != 0)
-//			math_round();
 }
 
-void	select_round(t_bigint f, t_bigint w, int index, int digit, char fl)
+void	fraction_select_round(t_bigint f, t_round r, char flag)
 {
-	int next_number;
-	size_t	mask;
-	int flg;
 	int	len;
 
-	mask = 1;
-	flg = 0;
-	len = ft_numlen(f.num[index]) - 1;
-	if (fl)
-	{
-		if (digit == len)
-			next_number = f.num[index - 1] / 100000000000000000 % 10;
-		else
-		{
-			while (flg != len - digit)
-			{
-				mask *= 10;
-				flg++;
-			}
-			next_number = f.num[index] % mask / (mask / 10);
-		}
-		if (next_number != 5)
-			math_round(f, w, index, digit, mask, next_number, fl);
-		else
-			check_zero(f, w, index, digit, len, mask, next_number, fl);
-	}
+	len = ft_numlen(f.num[r.index]) - 1;
+	r.mask = get_mask(len - r.nmb_pos);
+	r.next_digit = (r.nmb_pos == len) ?
+			f.num[r.index - 1] / 100000000000000000 % 10 :
+			f.num[r.index] % r.mask / (r.mask / 10);
+	if (r.next_digit != 5)
+		math_round(f, r, flag);
 	else
-	{
-		while (flg != (ft_numlen(f.num[f.start]) - 1))
-		{
-			mask *= 10;
-			flg++;
-		}
-		next_number = f.num[f.start] % mask / (mask / 10);
-		if (next_number != 5)
-			math_round(w, w, index, digit, mask, next_number, fl);
-		else
-			check_zero(w, w, index, digit, -255, mask, next_number, fl);
-	}
-	printf("\n%i\n", next_number);
+		check_zero(f, r, len, flag);
+	printf("\n%i\n", r.next_digit);
+}
+
+void	whole_select_round(t_bigint f, t_bigint w, t_round r, char flag)
+{
+	int f_digit;
+
+	r.mask = get_mask(ft_numlen(f.num[f.start]) - 1);
+	f_digit = f.num[f.start] % r.mask / (r.mask / 10);
+	r.next_digit = f_digit;
+	if (f_digit != 5)
+		math_round(w, r, flag);
+	else
+		check_zero(w, r, -255, flag);
+	printf("\n%i\n", f_digit);
 }
 
 void	fraction_round(t_bigint f)
 {
-	int	index;
-	int digit;
 	int pre;
 	int start_len;
-
+	t_round	r;
 
 	start_len = ft_numlen(f.num[f.start]) - 1;
 	if (g_f->pre < f.start * CLUSTER_SIZE + start_len)
 	{
 		pre = ((g_f->pre - start_len > 0) ? g_f->pre - start_len : 0);
-		index = f.start -
+		r.index = f.start -
 				(pre / CLUSTER_SIZE + ((pre % CLUSTER_SIZE != 0) * 1));
-//	pre = ft_numlen(f.num[index]) - 1;
-		if (index == f.start)
-			digit = g_f->pre % (start_len + 1);
+		if (r.index == f.start)
+			r.nmb_pos = g_f->pre % (start_len + 1);
 		else if (g_f->pre < CLUSTER_SIZE)
-			digit = (g_f->pre - start_len) % CLUSTER_SIZE;
+			r.nmb_pos = (g_f->pre - start_len) % CLUSTER_SIZE;
 		else
 		{
-			digit = (g_f->pre - start_len) % CLUSTER_SIZE;
-			if (digit == 0)
-				digit = 18;
+			r.nmb_pos = (g_f->pre - start_len) % CLUSTER_SIZE;
+			if (r.nmb_pos == 0)
+				r.nmb_pos = 18;
 		}
-		select_round(f, f, index, digit, 1);
-	printf("\nindex %i\n", index);
-	printf("digit %i\n", digit);
+		fraction_select_round(f, r, 1);
+	printf("\nr.index %i\n", r.index);
+	printf("digit %i\n", r.nmb_pos);
 	}
-}
-
-void	whole_round(t_bigint w, t_bigint f)
-{
-	int digit;
-
-	digit = ft_numlen(f.num[0]) - 1;
-	select_round(f, w, 0, digit, 0);
-	printf("digit %i\n", digit);
 }
 
 void	f_round(t_bigint w, t_bigint f)
 {
+	t_round	r;
+
 	if (g_f->pre > 0)
 		fraction_round(f);
-	else
-		whole_round(w, f);
+	else if (w.num && f.num)
+	{
+		r.index = 0;
+		r.nmb_pos = ft_numlen(f.num[0]) - 1;
+		whole_select_round(f, w, r, 0);
+	}
 }
