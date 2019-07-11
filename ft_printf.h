@@ -47,6 +47,7 @@ typedef struct	s_bigint
 	size_t	*num;
 	int		len;
 	int		start;
+	char	sign;
 }				t_bigint;
 
 typedef struct	s_round
@@ -98,5 +99,7 @@ t_bigint	get_whole(size_t man, int pow);
 void	f_long_double(va_list ap);
 void	f_f(va_list ap);
 t_bigint	check_overflow_five(t_bigint b, int i, int d);
+void	print(t_bigint f, t_bigint w, int index, int nmb_pos);
+t_bigint	get_null(void);
 
 #endif
