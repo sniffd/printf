@@ -136,10 +136,5 @@ t_bigint	get_whole(size_t man, int pow)
 		two = bigint_multy_two(two);
 	}
 	res.num[res.start] -= ZERO;
-		ft_putchar('\n');
-		for (int j = res.start; j >= 0; j--)
-		{
-			ft_putnbr(res.num[j]);
-		}
 	return (res);
 }
