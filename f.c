@@ -45,16 +45,24 @@ void	f_long_double(va_list ap)
 	t_bigint	fraction;
 	size_t		man_w;
 	size_t		man_f;
-	long double	ld;
 
-	ld = va_arg(ap, long double);
-	d.d = ld;
-	whole.num = NULL;
-	fraction.num = NULL;
+	d.d = va_arg(ap, long double);
+	if (!g_f->dot)
+	{
+		g_f->dot = 1;
+		g_f->pre = 6;
+	}
 	if (d.s.e - 16383 >= 63)
+	{
 		whole = get_whole(d.s.m, d.s.e - 16383);
+		fraction = get_null();
+		fraction.num[0] = 10;
+	}
 	else if (d.s.e - 16383 < 0)
+	{
 		fraction = get_fraction(d.s.m, d.s.e - 16383);
+		whole = get_null();
+	}
 	else
 	{
 		man_w = d.s.m >> (64 - (d.s.e - 16383 + 1));
@@ -62,5 +70,6 @@ void	f_long_double(va_list ap)
 		whole = get_whole(man_w, (d.s.e - 16383 + 64 - (d.s.e - 16383 + 1)));
 		fraction = get_fraction(man_f, d.s.e - 16383 - (d.s.e - 16383 + 1));
 	}
+	whole.sign = d.s.s;
 	f_round(whole, fraction);
 }
