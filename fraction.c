@@ -195,6 +195,18 @@ static t_bigint	bigint_multy_ten(t_bigint b)
 	return (res);
 }
 
+t_bigint	get_null(void)
+{
+	t_bigint	res;
+
+	res.num = ft_memalloc(8);
+	res.num[0] = 0;
+	res.start = 0;
+	res.len = 1;
+	res.sign = 0;
+	return (res);
+}
+
 t_bigint	get_fraction(size_t man, int pow)
 {
 	t_bigint	res;
@@ -234,11 +246,6 @@ t_bigint	get_fraction(size_t man, int pow)
 	if (!f)
 		res.num[0] = ZERO;
 	res.num[res.start] -= ZERO;
-	ft_putchar('\n');
-		for (int j = res.start; j >= 0; j--)
-		{
-			ft_putnbr(res.num[j]);
-		}
 	free(five.num);
 	return (res);
 }
