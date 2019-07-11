@@ -101,5 +101,6 @@ void			ft_putcharn(char c, ssize_t	n);
 char			*ft_vector(char *vector, const char *str, size_t i_size,
 		size_t len);
 char			*ft_strtolower(char *str);
+char			*ft_stoa(size_t n);
 
 #endif
