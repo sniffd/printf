@@ -6,7 +6,8 @@ char	*ft_else(char **vector, const char *str, size_t *size, size_t len)
 
 	if (ft_strlen(*vector) + ft_strlen(str) >= *size)
 	{
-		*size *= 2;
+		while (ft_strlen(*vector) + ft_strlen(str) >= *size)
+			*size *= 2;
 		if (!(ret = ft_memalloc(*size)))
 			exit(0);
 		ft_strcpy(ret, *vector);
