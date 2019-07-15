@@ -58,6 +58,14 @@ typedef struct	s_round
 	size_t	mask;
 }				t_round;
 
+typedef enum
+{
+	NORM,
+	INF,
+	NAN,
+	DENORM
+}	t_nan;
+
 extern char	*g_vector;
 extern t_f	*g_f;
 void	addcharn(char c, ssize_t n);
@@ -101,5 +109,8 @@ void	f_f(va_list ap);
 t_bigint	check_overflow_five(t_bigint b, int i, int d);
 void	print(t_bigint f, t_bigint w, int index, int nmb_pos);
 t_bigint	get_null(void);
+int	normal_check(struct s_double d);
+void	print_nan(int nan, char sign);
+void	f_print_sign(char sign, int plu, int spc);
 
 #endif
