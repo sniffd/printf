@@ -42,7 +42,7 @@ void	print_number(t_bigint f, t_bigint w, int index, int nmb_pos)
 		i = f.start;
 		print_part(f, i, index);
 		cluster = ft_stoa(f.num[index]);
-		if (index == 0)
+		if (index == 0 && nmb_pos == CLUSTER_SIZE)
 			g_vector = ft_vector(g_vector, cluster + 1, 5, 0);
 		else
 			g_vector = ft_vector(g_vector, cluster + 1, 5, nmb_pos);
