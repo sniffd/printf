@@ -52,24 +52,33 @@ void	f_long_double(va_list ap)
 		g_f->dot = 1;
 		g_f->pre = 6;
 	}
-	if (d.s.e - 16383 >= 63)
-	{
-		whole = get_whole(d.s.m, d.s.e - 16383);
-		fraction = get_null();
-		fraction.num[0] = 10;
-	}
-	else if (d.s.e - 16383 < 0)
-	{
-		fraction = get_fraction(d.s.m, d.s.e - 16383);
-		whole = get_null();
-	}
+	if (normal_check(d.s) == NAN || normal_check(d.s) == INF)
+		print_nan(normal_check(d.s), d.s.s);
+//		ft_vector(g_vector, "nan", 5, 0);
 	else
 	{
-		man_w = d.s.m >> (64 - (d.s.e - 16383 + 1));
-		man_f = d.s.m << (64 - (64 - (d.s.e - 16383 + 1)));
-		whole = get_whole(man_w, (d.s.e - 16383 + 64 - (d.s.e - 16383 + 1)));
-		fraction = get_fraction(man_f, d.s.e - 16383 - (d.s.e - 16383 + 1));
+		if (normal_check(d.s) == DENORM)
+			d.s.e = 1;
+		if (d.s.e - 16383 >= 63)
+		{
+			whole = get_whole(d.s.m, d.s.e - 16383);
+			fraction = get_null();
+			fraction.num[0] = 10;
+		}
+		else if (d.s.e - 16383 < 0)
+		{
+			fraction = get_fraction(d.s.m, d.s.e - 16383);
+			whole = get_null();
+		}
+		else
+		{
+			man_w = d.s.m >> (64 - (d.s.e - 16383 + 1));
+			man_f = d.s.m << (64 - (64 - (d.s.e - 16383 + 1)));
+			whole = get_whole(man_w,
+							  (d.s.e - 16383 + 64 - (d.s.e - 16383 + 1)));
+			fraction = get_fraction(man_f, d.s.e - 16383 - (d.s.e - 16383 + 1));
+		}
+		whole.sign = d.s.s;
+		f_round(whole, fraction);
 	}
-	whole.sign = d.s.s;
-	f_round(whole, fraction);
 }
