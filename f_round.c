@@ -59,7 +59,7 @@ void	check_zero(t_bigint *f, t_round *r, int len, char flag)
 		math_round(f, r, flag);
 	else
 	{
-		while (i >= 0)
+		while (i > 0)
 		{
 			if ((f->num[--i] - ZERO))
 			{
