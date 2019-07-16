@@ -9,9 +9,9 @@
 #include <math.h>
 #include <fcntl.h>
 //#include <opencl-c.h>
-t_bigint	get_whole(size_t man, int pow);
-t_bigint	pow_of_two(int pow);
-t_bigint	get_fraction(size_t man, int pow);
+//t_bigint	get_whole(size_t man, int pow);
+//t_bigint	pow_of_two(int pow);
+//t_bigint	get_fraction(size_t man, int pow);
 
 
 void test(char *str)
@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 //	d->d = -18446744073709551615.1L;
 //	d->d = 0.832862714530583059399L;
 //	d->d = 0.8895L;
-	d->d = LDBL_MIN;
+//	d->d = LDBL_MIN;
 //	d->d = LDBL_MAX;
 //	dd = DBL_MIN;
 //	d->d = 0.0000000000000000009L;
@@ -89,8 +89,11 @@ int	main(int argc, char **argv)
 //	short	exp = d->s.e - 16383;
 //	int i = 1;
 //l,h,ll,hh
-	printf("%.10000Lf\n", d->d);
-	ft_printf("%.10000Lf", d->d);
+//	printf("%.10000Lf\n", d->d);
+//	printf("%-10kw\n");
+//	ft_printf("%-10kw\n");
+//	ft_printf("%.10000Lf\n", d->d);
+//	printf("%.10000Lf", d->d);
 //	printf("qwe%c%c%cddddsadasdasdas%csadasdsadasdsadasdasdasd\n", 0, 0, 0,0);
 //	ft_printf("qwe%c%c%cddddsadasdasdas%csadasdsadasdsadasdasdasd\n", 0, 0, 0, 0);
 //	ft_printf("%b\n", 1245123456);
@@ -118,7 +121,12 @@ int	main(int argc, char **argv)
 //	t_bigint b = get_whole(man, exp);
 //	pow_of_two(500);
 //	t_bigint huy = get_fraction(man, exp);
-
+	printf("%.f|%-.f|%+.f|% .f|%#.f|%0.f\n", DBL_MIN, DBL_MIN, DBL_MIN, DBL_MIN, DBL_MIN, DBL_MIN);
+	ft_printf("%.f|%-.f|%+.f|% .f|%#.f|%0.f\n", DBL_MIN, DBL_MIN, DBL_MIN, DBL_MIN, DBL_MIN, DBL_MIN);
+	printf("%-#23.5llX|%-023.5llX|%#023.5llX|%-#023.5llX\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
+	ft_printf("%-#23.5llX|%-023.5llX|%#023.5llX|%-#023.5llX\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
+	printf("%lu|%-lu|%0lu\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
+	ft_printf("%lu|%-lu|%0lu\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
 //	printf("%s\n", ft_itoa_base(d->l, 2));
 //	printf("\n%s\n", ft_itoa_base(exp, 2));
 //	printf("exp %i\n", exp);

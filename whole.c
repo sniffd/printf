@@ -77,6 +77,7 @@ static t_bigint	bigint_add(t_bigint a, t_bigint b)
 		i++;
 	}
 	while_i_less_biggestlen(0, &res, a, b);
+	free(a.num);
 	return (res);
 }
 
@@ -124,5 +125,6 @@ t_bigint		get_whole(size_t man, int pow)
 		two = bigint_multy_two(two);
 	}
 	res.num[res.start] -= ZERO;
+	free(two.num);
 	return (res);
 }

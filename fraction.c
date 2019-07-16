@@ -1,6 +1,5 @@
 #include "ft_printf.h"
 
-
 t_bigint		bigint_add_f(t_bigint a, t_bigint b)
 {
 	t_bigint	res;
@@ -20,7 +19,6 @@ t_bigint		bigint_add_f(t_bigint a, t_bigint b)
 		i++;
 	}
 	while_i_less_biggistlen(&res, a, b, 0);
-//	free(b.num);
 	free(a.num);
 	return (res);
 }
@@ -47,10 +45,11 @@ static t_bigint	bigint_multy_ten(t_bigint b)
 	}
 	res.num[0] = ((b.num[0] - ZERO) * 10) + ZERO;
 	res = check_overflow(res, 0);
+	free(b.num);
 	return (res);
 }
 
-t_bigint	get_null(void)
+t_bigint		get_null(void)
 {
 	t_bigint	res;
 

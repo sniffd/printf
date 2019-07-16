@@ -11,7 +11,8 @@ void	int_char(va_list ap)
 	arg = (char)va_arg(ap, int);
 	in = ft_itoa((int)ft_abs(arg));
 	len = (int)ft_strlen(in);
-	tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1 : g_f->wid - len;
+	tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1
+			: g_f->wid - len;
 	if (tmplen <= 0)
 	{
 		print_sign(arg, g_f->plu, g_f->spc);
@@ -38,7 +39,8 @@ void	int_short(va_list ap)
 	arg = (short)va_arg(ap, int);
 	in = ft_itoa((int)ft_abs(arg));
 	len = (int)ft_strlen(in);
-	tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1 : g_f->wid - len;
+	tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1
+			: g_f->wid - len;
 	if (tmplen <= 0)
 	{
 		print_sign(arg, g_f->plu, g_f->spc);
@@ -65,7 +67,8 @@ void	int_int(va_list ap)
 	arg = va_arg(ap, int);
 	in = ft_itoa((int)ft_abs(arg));
 	len = (int)ft_strlen(in);
-	tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1 : g_f->wid - len;
+	tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1
+			: g_f->wid - len;
 	if (tmplen <= 0)
 	{
 		print_sign(arg, g_f->plu, g_f->spc);
@@ -92,7 +95,8 @@ void	int_long(va_list ap)
 	arg = va_arg(ap, long);
 	in = ft_itoa((long)ft_abs(arg));
 	len = (int)ft_strlen(in);
-	tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1 : g_f->wid - len;
+	tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1
+			: g_f->wid - len;
 	if (tmplen <= 0)
 	{
 		print_sign(arg, g_f->plu, g_f->spc);
@@ -119,7 +123,8 @@ void	int_long_long(va_list ap)
 	arg = va_arg(ap, long long);
 	in = ft_itoa(ft_abs(arg));
 	len = (int)ft_strlen(in);
-	tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1 : g_f->wid - len;
+	tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1
+			: g_f->wid - len;
 	if (tmplen <= 0)
 	{
 		print_sign(arg, g_f->plu, g_f->spc);

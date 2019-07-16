@@ -1,10 +1,10 @@
 #include "ft_printf.h"
 
-void	character(va_list ap)
+void	character(va_list ap, char *ch)
 {
 	char	c;
 
-	c = (char)va_arg(ap, int);
+	c = ch ? *ch : (char)va_arg(ap, int);
 	if (c == '\0')
 		g_f->flg = 1;
 	if (g_f->wid)

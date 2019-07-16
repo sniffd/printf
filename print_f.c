@@ -46,6 +46,7 @@ void	print_number(t_bigint f, t_bigint w, int index, int nmb_pos)
 			g_vector = ft_vector(g_vector, cluster + 1, 5, 0);
 		else
 			g_vector = ft_vector(g_vector, cluster + 1, 5, nmb_pos);
+		free(cluster);
 	}
 	if (g_f->pre > flen)
 		addcharn('0', g_f->pre - flen);
@@ -90,4 +91,6 @@ void	print(t_bigint f, t_bigint w, int index, int nmb_pos)
 		f_print_sign(w.sign, g_f->plu, g_f->spc);
 		print_number(f, w, index, nmb_pos);
 	}
+	free(f.num);
+	free(w.num);
 }

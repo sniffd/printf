@@ -2,7 +2,7 @@
 
 static int g_len;
 
-void	nullcpy(char *s1, const char *s2, size_t len)
+void		nullcpy(char *s1, const char *s2, size_t len)
 {
 	size_t	i;
 
@@ -19,35 +19,35 @@ void	nullcpy(char *s1, const char *s2, size_t len)
 	}
 }
 
-void	nullcat(char *s1, const char *s2, size_t len)
+void		nullcat(char *s1, const char *s2, size_t len)
 {
 	nullcpy(s1 + g_len, s2, len);
 }
 
-char    *ft_if(char **vector, const char *str, size_t *size, size_t len)
+char		*ft_if(char **vector, const char *str, size_t *size, size_t len)
 {
-    char *ret;
+	char	*ret;
 
-    while (ft_strlen(*vector) + 1 + ft_strlen(str) >= *size)
-        *size *= 2;
-    if (!(ret = ft_memalloc(*size)))
-        exit(0);
-    ft_strcpy(ret, *vector);
-    if (!len)
-    {
-        ft_strcat(ret, str);
-        g_len += ft_strlen(str);
-    }
-    else
-    {
-        nullcat(ret, str, len);
-        g_len += len;
-    }
-    free(*vector);
-    return (ret);
+	while (ft_strlen(*vector) + 1 + ft_strlen(str) >= *size)
+		*size *= 2;
+	if (!(ret = ft_memalloc(*size)))
+		exit(0);
+	ft_strcpy(ret, *vector);
+	if (!len)
+	{
+		ft_strcat(ret, str);
+		g_len += ft_strlen(str);
+	}
+	else
+	{
+		nullcat(ret, str, len);
+		g_len += len;
+	}
+	free(*vector);
+	return (ret);
 }
 
-char	*ft_else(char **vector, const char *str, size_t *size, size_t len)
+char		*ft_else(char **vector, const char *str, size_t *size, size_t len)
 {
 	if (ft_strlen(*vector) + 1 + ft_strlen(str) >= *size)
 		return (ft_if(vector, str, size, len));
@@ -67,7 +67,7 @@ char	*ft_else(char **vector, const char *str, size_t *size, size_t len)
 	}
 }
 
-char	*ft_vector(char *vector, const char *str, size_t i_size, size_t len)
+char		*ft_vector(char *vector, const char *str, size_t i_size, size_t len)
 {
 	static size_t	size;
 	char			*ret;
