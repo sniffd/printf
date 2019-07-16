@@ -30,8 +30,8 @@ int	main(int argc, char **argv)
 //	d->d = -18446744073709551615.1L;
 //	d->d = 0.832862714530583059399L;
 //	d->d = 0.8895L;
-//	d->d = LDBL_MIN;
-	d->d = LDBL_MAX;
+	d->d = LDBL_MIN;
+//	d->d = LDBL_MAX;
 //	dd = DBL_MIN;
 //	d->d = 0.0000000000000000009L;
 //	d->d = 12.6543L;
@@ -89,8 +89,8 @@ int	main(int argc, char **argv)
 //	short	exp = d->s.e - 16383;
 //	int i = 1;
 //l,h,ll,hh
-	printf("%.1000Lf\n", d->d);
-	ft_printf("%.1000Lf", d->d);
+	printf("%.10000Lf\n", d->d);
+	ft_printf("%.10000Lf", d->d);
 //	printf("qwe%c%c%cddddsadasdasdas%csadasdsadasdsadasdasdasd\n", 0, 0, 0,0);
 //	ft_printf("qwe%c%c%cddddsadasdasdas%csadasdsadasdsadasdasdasd\n", 0, 0, 0, 0);
 //	ft_printf("%b\n", 1245123456);

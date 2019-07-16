@@ -68,6 +68,8 @@ void	fraction_round(t_bigint *f, t_round *r)
 		}
 		fraction_select_round(f, r, 1);
 	}
+	else
+		r->nmb_pos = 18;
 }
 
 void	f_round(t_bigint w, t_bigint f)
