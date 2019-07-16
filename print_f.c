@@ -26,8 +26,8 @@ void	print_part(t_bigint b, int i, int j)
 void	print_number(t_bigint f, t_bigint w, int index, int nmb_pos)
 {
 	char	*cluster;
-	int 	i;
-	int 	flen;
+	int		i;
+	int		flen;
 
 	flen = f.start * CLUSTER_SIZE + ft_numlen(f.num[f.start]) - 1;
 	i = w.start;
@@ -51,10 +51,10 @@ void	print_number(t_bigint f, t_bigint w, int index, int nmb_pos)
 		addcharn('0', g_f->pre - flen);
 }
 
-void 	select_condition(t_bigint f, t_bigint w, int nmb_pos, int index)
+void	select_condition(t_bigint f, t_bigint w, int nmb_pos, int index)
 {
 	int		wlen;
-	int 	len;
+	int		len;
 
 	wlen = w.start * CLUSTER_SIZE + ft_numlen(w.num[w.start]) + w.sign;
 	len = g_f->wid - (wlen + g_f->pre + 1 + (g_f->plu || g_f->spc || w.sign));

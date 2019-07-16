@@ -11,7 +11,7 @@ void	b_char(va_list ap)
 	in = ft_strtolower(ft_itoa_base(arg, 2));
 	len = (int)ft_strlen(in);
 	g_f->wid = (g_f->okt || g_f->f == 'p') && arg && ((--g_f->wid || 1) &&
-													  (!--g_f->wid || 1)) ? g_f->wid : g_f->wid;
+	(!--g_f->wid || 1)) ? g_f->wid : g_f->wid;
 	tmplen = g_f->wid - len;
 	if (tmplen <= 0)
 	{
@@ -40,7 +40,7 @@ void	b_short(va_list ap)
 	in = ft_strtolower(ft_itoa_base(arg, 2));
 	len = (int)ft_strlen(in);
 	g_f->wid = (g_f->okt || g_f->f == 'p') && arg && ((--g_f->wid || 1) &&
-													  (!--g_f->wid || 1)) ? g_f->wid : g_f->wid;
+	(!--g_f->wid || 1)) ? g_f->wid : g_f->wid;
 	tmplen = g_f->wid - len;
 	if (tmplen <= 0)
 	{
@@ -69,7 +69,7 @@ void	b_int(va_list ap)
 	in = ft_strtolower(ft_itoa_base(arg, 2));
 	len = (int)ft_strlen(in);
 	g_f->wid = (g_f->okt || g_f->f == 'p') && arg && ((--g_f->wid || 1) &&
-													  (!--g_f->wid || 1)) ? g_f->wid : g_f->wid;
+	(!--g_f->wid || 1)) ? g_f->wid : g_f->wid;
 	tmplen = g_f->wid - len;
 	if (tmplen <= 0)
 	{
@@ -98,7 +98,7 @@ void	b_long(va_list ap)
 	in = ft_strtolower(ft_itoa_base(arg, 2));
 	len = (int)ft_strlen(in);
 	g_f->wid = (g_f->okt || g_f->f == 'p') && arg && ((--g_f->wid || 1) &&
-													  (!--g_f->wid || 1)) ? g_f->wid : g_f->wid;
+	(!--g_f->wid || 1)) ? g_f->wid : g_f->wid;
 	tmplen = g_f->wid - len;
 	if (tmplen <= 0)
 	{
@@ -127,7 +127,7 @@ void	b_long_long(va_list ap)
 	in = ft_strtolower(ft_itoa_base(arg, 2));
 	len = (int)ft_strlen(in);
 	g_f->wid = (g_f->okt || g_f->f == 'p') && arg && ((--g_f->wid || 1) &&
-													  (!--g_f->wid || 1)) ? g_f->wid : g_f->wid;
+	(!--g_f->wid || 1)) ? g_f->wid : g_f->wid;
 	tmplen = g_f->wid - len;
 	if (tmplen <= 0)
 	{

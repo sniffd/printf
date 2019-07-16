@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int	all_ones(struct s_double d)
+int			all_ones(struct s_double d)
 {
 	if (!(d.m & (3UL << 62)))
 	{
@@ -22,7 +22,7 @@ int	all_ones(struct s_double d)
 		return (NAN);
 }
 
-int	normal_check(struct s_double d)
+int			normal_check(struct s_double d)
 {
 	if (d.e == 0)
 	{
@@ -39,7 +39,7 @@ int	normal_check(struct s_double d)
 		return (NORM);
 }
 
-void	wid(char sign, char *s)
+void		wid(char sign, char *s)
 {
 	if (g_f->min)
 	{
@@ -55,7 +55,7 @@ void	wid(char sign, char *s)
 	}
 }
 
-void	print_nan(int nan, char sign)
+void		print_nan(int nan, char sign)
 {
 	char	*s;
 
