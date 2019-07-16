@@ -1,5 +1,4 @@
 #include "ft_printf.h"
-#include <stdio.h>
 
 static t_bigint	pow_of_two(int pow)
 {
@@ -29,8 +28,7 @@ static t_bigint	pow_of_two(int pow)
 	return (b);
 }
 
-
-static void	while_i_less_biggestlen(int i, t_bigint *res, t_bigint a,
+static void		while_i_less_biggestlen(int i, t_bigint *res, t_bigint a,
 															t_bigint b)
 {
 	char		biggest;
@@ -82,23 +80,6 @@ static t_bigint	bigint_add(t_bigint a, t_bigint b)
 	return (res);
 }
 
-void	multy_two(t_bigint *res, t_bigint b, int i)
-{
-	while (i >= 0)
-	{
-		res->num[i] = ((b.num[i] - ZERO) << 1) + ZERO;
-		if (res->num[i] > LIM)
-		{
-			res->num[i + 1] = (res->num[i + 1] - ZERO) + ((res->num[i] - ZERO)
-														/ DIV) + ZERO;
-			res->num[i] = (res->num[i] - ZERO) % DIV + ZERO;
-			if (i + 1 > res->start)
-				res->start++;
-		}
-		i--;
-	}
-}
-
 static t_bigint	bigint_multy_two(t_bigint b)
 {
 	t_bigint	res;
@@ -119,12 +100,12 @@ static t_bigint	bigint_multy_two(t_bigint b)
 	return (res);
 }
 
-t_bigint	get_whole(size_t man, int pow)
+t_bigint		get_whole(size_t man, int pow)
 {
 	t_bigint	res;
 	t_bigint	two;
-	size_t	mant;
-	char	bit;
+	size_t		mant;
+	char		bit;
 
 	res.num = (size_t *)ft_memalloc(8);
 	res.len = 0;

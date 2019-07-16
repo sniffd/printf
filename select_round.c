@@ -1,0 +1,55 @@
+
+#include "ft_printf.h"
+
+size_t	get_mask(int i)
+{
+	size_t	mask[19];
+
+	mask[1] = 10;
+	mask[2] = 100;
+	mask[3] = 1000;
+	mask[4] = 10000;
+	mask[5] = 100000;
+	mask[6] = 1000000;
+	mask[7] = 10000000;
+	mask[8] = 100000000;
+	mask[9] = 1000000000;
+	mask[10] = 10000000000;
+	mask[11] = 100000000000;
+	mask[12] = 1000000000000;
+	mask[13] = 10000000000000;
+	mask[14] = 100000000000000;
+	mask[15] = 1000000000000000;
+	mask[16] = 10000000000000000;
+	mask[17] = 100000000000000000;
+	mask[18] = 1000000000000000000;
+	return (mask[i]);
+}
+
+void	fraction_select_round(t_bigint *f, t_round *r, char flag)
+{
+	int	len;
+
+	len = ft_numlen(f->num[r->index]) - 1;
+	r->mask = get_mask(len - r->nmb_pos);
+	r->next_digit = (r->nmb_pos == len) ?
+					f->num[r->index - 1] / 100000000000000000 % 10 :
+					f->num[r->index] % r->mask / (r->mask / 10);
+	if (r->next_digit != 5)
+		math_round(f, r, flag);
+	else
+		check_zero(f, r, len, flag);
+}
+
+void	whole_select_round(t_bigint *f, t_bigint *w, t_round *r, char flag)
+{
+	int f_digit;
+
+	r->mask = get_mask(ft_numlen(f->num[f->start]) - 1);
+	f_digit = f->num[f->start] % r->mask / (r->mask / 10);
+	r->next_digit = f_digit;
+	if (f_digit != 5)
+		math_round(w, r, flag);
+	else
+		check_zero(w, r, -255, flag);
+}

@@ -130,5 +130,19 @@ void	binary(va_list ap);
 size_t	printf_strlen(const char *s, int n);
 char			*ft_vector(char *vector, const char *str, size_t i_size,
 						   size_t len);
+void	f_round(t_bigint w, t_bigint f);
+void	fraction_select_round(t_bigint *f, t_round *r, char flag);
+void	whole_select_round(t_bigint *f, t_bigint *w, t_round *r, char flag);
+size_t	get_mask(int i);
+void	math_round(t_bigint *b, t_round *r, char flag);
+void	check_zero(t_bigint *f, t_round *r, int len, char flag);
+void			while_i_less_biggistlen(t_bigint *res, t_bigint a, t_bigint b, int i);
+int			if_i_biggest_lim(t_bigint *res, int i, t_bigint a, t_bigint b);
+int			if_or_else(t_bigint *res, t_bigint a, t_bigint b, int *i);
+t_bigint	check_overflow(t_bigint b, int i);
+t_bigint	pow_of_five(int pow);
+void		power_of_five(int pow, int p, int i, t_bigint *b);
+t_bigint	bigint_multy_five(t_bigint b);
+void		multy_two(t_bigint *res, t_bigint b, int i);
 
 #endif
