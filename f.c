@@ -2,49 +2,54 @@
 
 void	f_round(t_bigint w, t_bigint f);
 
-void	f_double(va_list ap)
+void	norm_or_denorm(t_double d)
 {
-	t_double	d;
 	t_bigint	whole;
 	t_bigint	fraction;
-	size_t		man_w;
-	size_t		man_f;
-	long double	ld;
 
-	ld = va_arg(ap, long double);
-	d.d = ld;
-	whole.num = NULL;
-	fraction.num = NULL;
+	if (normal_check(d.s) == DENORM)
+		d.s.e = 1;
 	if (d.s.e - 16383 >= 63)
+	{
 		whole = get_whole(d.s.m, d.s.e - 16383);
+		fraction = get_null();
+		fraction.num[0] = 10;
+	}
 	else if (d.s.e - 16383 < 0)
+	{
 		fraction = get_fraction(d.s.m, d.s.e - 16383);
+		whole = get_null();
+	}
 	else
 	{
-		man_w = d.s.m >> (64 - (d.s.e - 16383 + 1));
-		man_f = d.s.m << (64 - (64 - (d.s.e - 16383 + 1)));
-		whole = get_whole(man_w, (d.s.e - 16383 + 64 - (d.s.e - 16383 + 1)));
-		fraction = get_fraction(man_f, d.s.e - 16383 - (d.s.e - 16383 + 1));
+		whole = get_whole((d.s.m >> (64 - (d.s.e - 16383 + 1))),
+						  (d.s.e - 16383 + 64 - (d.s.e - 16383 + 1)));
+		fraction = get_fraction((d.s.m << (64 - (64 - (d.s.e - 16383 + 1))))
+				, d.s.e - 16383 - (d.s.e - 16383 + 1));
 	}
+	whole.sign = d.s.s;
 	f_round(whole, fraction);
 }
 
-void	f_f(va_list ap)
+void	f_double(va_list ap)
 {
-	if (g_f->bl)
-		f_long_double(ap);
-//	else
-//		f_double();
+	t_double	d;
 
+	d.d = va_arg(ap, double);
+	if (!g_f->dot)
+	{
+		g_f->dot = 1;
+		g_f->pre = 6;
+	}
+	if (normal_check(d.s) == NAN || normal_check(d.s) == INF)
+		print_nan(normal_check(d.s), d.s.s);
+	else
+		norm_or_denorm(d);
 }
 
 void	f_long_double(va_list ap)
 {
 	t_double	d;
-	t_bigint	whole;
-	t_bigint	fraction;
-	size_t		man_w;
-	size_t		man_f;
 
 	d.d = va_arg(ap, long double);
 	if (!g_f->dot)
@@ -54,31 +59,15 @@ void	f_long_double(va_list ap)
 	}
 	if (normal_check(d.s) == NAN || normal_check(d.s) == INF)
 		print_nan(normal_check(d.s), d.s.s);
-//		ft_vector(g_vector, "nan", 5, 0);
 	else
-	{
-		if (normal_check(d.s) == DENORM)
-			d.s.e = 1;
-		if (d.s.e - 16383 >= 63)
-		{
-			whole = get_whole(d.s.m, d.s.e - 16383);
-			fraction = get_null();
-			fraction.num[0] = 10;
-		}
-		else if (d.s.e - 16383 < 0)
-		{
-			fraction = get_fraction(d.s.m, d.s.e - 16383);
-			whole = get_null();
-		}
-		else
-		{
-			man_w = d.s.m >> (64 - (d.s.e - 16383 + 1));
-			man_f = d.s.m << (64 - (64 - (d.s.e - 16383 + 1)));
-			whole = get_whole(man_w,
-							  (d.s.e - 16383 + 64 - (d.s.e - 16383 + 1)));
-			fraction = get_fraction(man_f, d.s.e - 16383 - (d.s.e - 16383 + 1));
-		}
-		whole.sign = d.s.s;
-		f_round(whole, fraction);
-	}
+		norm_or_denorm(d);
+}
+
+void	f_f(va_list ap)
+{
+	if (g_f->bl)
+		f_long_double(ap);
+	else
+		f_double(ap);
+
 }

@@ -1,0 +1,137 @@
+#include "ft_printf.h"
+#include <stdio.h>
+
+void	uint_char(va_list ap)
+{
+	char			*in;
+	int				tmplen;
+	int				len;
+	unsigned int	arg;
+
+	arg = (unsigned char)va_arg(ap, unsigned int);
+	in = ft_stoa(arg);
+	len = (int)ft_strlen(in);
+	tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1 : g_f->wid - len;
+	if (tmplen <= 0)
+	{
+		print_sign(arg, g_f->plu, g_f->spc);
+		tmplen = g_f->pre - len;
+		addcharn('0', tmplen);
+		if (!(!g_f->pre && !arg))
+			g_vector = ft_vector(g_vector, in, 5, 0);
+	}
+	else if (g_f->min)
+		minus(arg, len, in);
+	else if (g_f->dot)
+		precision(arg, len, in);
+	else
+		zero_and_else(arg, in, tmplen);
+}
+
+void	uint_short(va_list ap)
+{
+	char			*in;
+	int				tmplen;
+	int				len;
+	unsigned int	arg;
+
+	arg = (unsigned short)va_arg(ap, unsigned int);
+	in = ft_stoa(arg);
+	len = (int)ft_strlen(in);
+	tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1 : g_f->wid - len;
+	if (tmplen <= 0)
+	{
+		print_sign(arg, g_f->plu, g_f->spc);
+		tmplen = g_f->pre - len;
+		addcharn('0', tmplen);
+		if (!(!g_f->pre && !arg))
+			g_vector = ft_vector(g_vector, in, 5, 0);
+	}
+	else if (g_f->min)
+		minus(arg, len, in);
+	else if (g_f->dot)
+		precision(arg, len, in);
+	else
+		zero_and_else(arg, in, tmplen);
+}
+
+void	uint_int(va_list ap)
+{
+	char			*in;
+	int				tmplen;
+	int				len;
+	unsigned int	arg;
+
+	arg = va_arg(ap, unsigned int);
+	in = ft_stoa((unsigned int)arg);
+	len = (int)ft_strlen(in);
+	tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1 : g_f->wid - len;
+	if (tmplen <= 0)
+	{
+		print_sign(arg, g_f->plu, g_f->spc);
+		tmplen = g_f->pre - len;
+		addcharn('0', tmplen);
+		if (!(!g_f->pre && !arg))
+			g_vector = ft_vector(g_vector, in, 5, 0);
+	}
+	else if (g_f->min)
+		minus(arg, len, in);
+	else if (g_f->dot)
+		precision(arg, len, in);
+	else
+		zero_and_else(arg, in, tmplen);
+}
+
+void	uint_long(va_list ap)
+{
+	char			*in;
+	int				tmplen;
+	int				len;
+	unsigned long	arg;
+
+	arg = va_arg(ap, unsigned long);
+	in = ft_stoa((unsigned long)arg);
+	len = (int)ft_strlen(in);
+	tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1 : g_f->wid - len;
+	if (tmplen <= 0)
+	{
+		print_sign(arg, g_f->plu, g_f->spc);
+		tmplen = g_f->pre - len;
+		addcharn('0', tmplen);
+		if (!(!g_f->pre && !arg))
+			g_vector = ft_vector(g_vector, in, 5, 0);
+	}
+	else if (g_f->min)
+		minus(arg, len, in);
+	else if (g_f->dot)
+		precision(arg, len, in);
+	else
+		zero_and_else(arg, in, tmplen);
+}
+
+void	uint_long_long(va_list ap)
+{
+	char				*in;
+	int					tmplen;
+	int					len;
+	unsigned long long	arg;
+
+	arg = va_arg(ap, unsigned long long);
+	in = ft_stoa(arg);
+	len = (int)ft_strlen(in);
+	tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1 : g_f->wid - len;
+	if (tmplen <= 0)
+	{
+		print_sign(arg, g_f->plu, g_f->spc);
+		tmplen = g_f->pre - len;
+		addcharn('0', tmplen);
+		if (!(!g_f->pre && !arg))
+			g_vector = ft_vector(g_vector, in, 5, 0);
+	}
+	else if (g_f->min)
+		minus(arg, len, in);
+	else if (g_f->dot)
+		precision(arg, len, in);
+	else
+		zero_and_else(arg, in, tmplen);
+}

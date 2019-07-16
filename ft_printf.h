@@ -26,6 +26,7 @@ typedef	struct	s_f
 	int		dot;
 	int		pre;
 	int		wid;
+	int 	flg;
 	char	f;
 }				t_f;
 
@@ -68,6 +69,7 @@ typedef enum
 
 extern char	*g_vector;
 extern t_f	*g_f;
+extern int	g_eos;
 void	addcharn(char c, ssize_t n);
 int	ft_printf(const char *format, ...);
 t_f	*parse(const char **s, va_list ap);
@@ -106,11 +108,27 @@ t_bigint	get_fraction(size_t man, int pow);
 t_bigint	get_whole(size_t man, int pow);
 void	f_long_double(va_list ap);
 void	f_f(va_list ap);
-t_bigint	check_overflow_five(t_bigint b, int i, int d);
+t_bigint check_overflow_five(t_bigint b, int i);
 void	print(t_bigint f, t_bigint w, int index, int nmb_pos);
 t_bigint	get_null(void);
 int	normal_check(struct s_double d);
 void	print_nan(int nan, char sign);
 void	f_print_sign(char sign, int plu, int spc);
+void	percent(void);
+void	uint_char(va_list ap);
+void	uint_short(va_list ap);
+void	uint_int(va_list ap);
+void	uint_long(va_list ap);
+void	uint_long_long(va_list ap);
+void	uinteger(va_list ap);
+void	b_char(va_list ap);
+void	b_short(va_list ap);
+void	b_int(va_list ap);
+void	b_long(va_list ap);
+void	b_long_long(va_list ap);
+void	binary(va_list ap);
+size_t	printf_strlen(const char *s, int n);
+char			*ft_vector(char *vector, const char *str, size_t i_size,
+						   size_t len);
 
 #endif

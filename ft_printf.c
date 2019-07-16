@@ -2,6 +2,7 @@
 
 char	*g_vector = NULL;
 t_f		*g_f = NULL;
+int 	g_eos = 0;
 
 int	ft_printf(const char *format, ...)
 {
@@ -29,6 +30,12 @@ int	ft_printf(const char *format, ...)
 				hex(ap);
 			else if (g_f->f == 'f')
 				f_f(ap);
+			else if (g_f->f == '%')
+				percent();
+			else if (g_f->f == 'u')
+				uinteger(ap);
+			else if (g_f->f == 'b')
+				binary(ap);
 		}
 		else
 		{
@@ -37,7 +44,7 @@ int	ft_printf(const char *format, ...)
 		}
 	}
 	va_end(ap);
-	len = ft_strlen(g_vector);
+	len = printf_strlen(g_vector, g_eos);
 	write(1, g_vector, len);
 	if (g_vector)
 		ft_strdel(&g_vector);

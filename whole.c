@@ -7,35 +7,57 @@ static t_bigint	pow_of_two(int pow)
 	int			i;
 	int			p;
 
-	p = 0;
+	p = -1;
 	b.len = pow / 59 + 1;
 	b.num = (size_t *)ft_memalloc(sizeof(size_t) * b.len);
 	b.num[0] = ZERO + 1;
 	b.start = 0;
-	i = 1;
-	while (i < b.len)
-	{
+	i = 0;
+	while (++i < b.len)
 		b.num[i] = ZERO;
-		i++;
-	}
-	while (p < pow)
-	{
-		i = b.start;
-		while (i >= 0)
-		{
-			b.num[i] = ((b.num[i] - ZERO) << 1) + ZERO;
+	while ((++p < pow) && ((i = b.start + 1) || 1))
+		while ((--i >= 0)
+		&& ((b.num[i] = ((b.num[i] - ZERO) << 1) + ZERO) || 1))
 			if (b.num[i] >= LIM)
 			{
-				b.num[i + 1] = (b.num[i + 1] - ZERO) + ((b.num[i] - ZERO) / DIV) + ZERO;
+				b.num[i + 1] = (b.num[i + 1] - ZERO) + ((b.num[i] - ZERO) / DIV)
+						+ ZERO;
 				b.num[i] = (b.num[i] - ZERO) % DIV + ZERO;
 				if (i + 1 > b.start)
 					b.start++;
 			}
-			i--;
-		}
-		p++;
-	}
 	return (b);
+}
+
+
+static void	while_i_less_biggestlen(int i, t_bigint *res, t_bigint a,
+															t_bigint b)
+{
+	char		biggest;
+	int			biggestlen;
+	int			lowestlen;
+
+	biggest = a.start > b.start ? 'a' : 'b';
+	biggestlen = (biggest == 'a' ? a.start + 1 : b.start + 1);
+	lowestlen = (biggest == 'a' ? b.start + 1 : a.start + 1);
+	while (i < biggestlen)
+	{
+		if (i < lowestlen)
+			res->num[i] = (res->num[i] - ZERO) + (a.num[i] - ZERO) + (b.num[i]
+					- ZERO) + ZERO;
+		else
+			res->num[i] = (biggest == 'a' ? ((res->num[i] - ZERO) + (a.num[i]
+		- ZERO) + ZERO) : ((res->num[i] - ZERO) + (b.num[i] - ZERO) + ZERO));
+		if (res->num[i] > LIM)
+		{
+			res->num[i + 1] = (res->num[i + 1] - ZERO) + ((res->num[i] - ZERO)
+					/ DIV) + ZERO;
+			res->num[i] = (res->num[i] - ZERO) % DIV + ZERO;
+			i + 1 > res->start ? (res->start)++ : 0;
+			i + 1 == biggestlen ? biggestlen++ : 0;
+		}
+		(i++ > res->start) ? res->start++ : 0;
+	}
 }
 
 static t_bigint	bigint_add(t_bigint a, t_bigint b)
@@ -43,12 +65,10 @@ static t_bigint	bigint_add(t_bigint a, t_bigint b)
 	t_bigint	res;
 	char		biggest;
 	int			biggestlen;
-	int			lowestlen;
 	int			i;
 
 	biggest = a.start > b.start ? 'a' : 'b';
 	biggestlen = (biggest == 'a' ? a.start + 1 : b.start + 1);
-	lowestlen = (biggest == 'a' ? b.start + 1 : a.start + 1);
 	res.num = ft_memalloc(sizeof(size_t) * (biggestlen + 1));
 	res.len = biggestlen + 1;
 	i = 0;
@@ -58,27 +78,25 @@ static t_bigint	bigint_add(t_bigint a, t_bigint b)
 		res.num[i] = ZERO;
 		i++;
 	}
-	i = 0;
-	while (i < biggestlen)
-	{
-		if (i < lowestlen)
-			res.num[i] = (res.num[i] - ZERO) + (a.num[i] - ZERO) + (b.num[i] - ZERO) + ZERO;
-		else
-			res.num[i] = (biggest == 'a' ? ((res.num[i] - ZERO) + (a.num[i] - ZERO) + ZERO) : ((res.num[i] - ZERO) + (b.num[i] - ZERO) + ZERO));
-		if (res.num[i] > LIM)
-		{
-			res.num[i + 1] = (res.num[i + 1] - ZERO) + ((res.num[i] - ZERO) / DIV) + ZERO;
-			res.num[i] = (res.num[i] - ZERO) % DIV + ZERO;
-			if (i + 1 > res.start)
-				res.start++;
-			if (i + 1 == biggestlen)
-				biggestlen++;
-		}
-		else if (i > res.start)
-			res.start++;
-		i++;
-	}
+	while_i_less_biggestlen(0, &res, a, b);
 	return (res);
+}
+
+void	multy_two(t_bigint *res, t_bigint b, int i)
+{
+	while (i >= 0)
+	{
+		res->num[i] = ((b.num[i] - ZERO) << 1) + ZERO;
+		if (res->num[i] > LIM)
+		{
+			res->num[i + 1] = (res->num[i + 1] - ZERO) + ((res->num[i] - ZERO)
+														/ DIV) + ZERO;
+			res->num[i] = (res->num[i] - ZERO) % DIV + ZERO;
+			if (i + 1 > res->start)
+				res->start++;
+		}
+		i--;
+	}
 }
 
 static t_bigint	bigint_multy_two(t_bigint b)
@@ -96,18 +114,7 @@ static t_bigint	bigint_multy_two(t_bigint b)
 		i--;
 	}
 	i = b.start;
-	while (i >= 0)
-	{
-		res.num[i] = ((b.num[i] - ZERO) << 1) + ZERO;
-		if (res.num[i] > LIM)
-		{
-			res.num[i + 1] = (res.num[i + 1] - ZERO) + ((res.num[i] - ZERO) / DIV) + ZERO;
-			res.num[i] = (res.num[i] - ZERO) % DIV + ZERO;
-			if (i + 1 > res.start)
-				res.start++;
-		}
-		i--;
-	}
+	multy_two(&res, b, i);
 	free(b.num);
 	return (res);
 }

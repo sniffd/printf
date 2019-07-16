@@ -5,6 +5,8 @@ void	character(va_list ap)
 	char	c;
 
 	c = (char)va_arg(ap, int);
+	if (c == '\0')
+		g_f->flg = 1;
 	if (g_f->wid)
 	{
 		if (g_f->min)

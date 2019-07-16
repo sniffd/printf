@@ -31,7 +31,7 @@ void	math_round(t_bigint *b, t_round *r, char flag)
 	if (r->next_digit > 4)
 	{
 		b->num[r->index] = !flag ? b->num[r->index] + 1 : b->num[r->index] + r->mask;
-		*b = check_overflow_five(*b, r->index, 255);
+		*b = check_overflow_five(*b, r->index);
 	}
 }
 
@@ -46,7 +46,7 @@ void	printf_round(t_bigint *b, int index, size_t mask, char flag)
 	if (number % 2 == 1)
 	{
 		b->num[index] = !flag ? b->num[index] + 1 : b->num[index] + mask;
-		*b = check_overflow_five(*b, index, 255);
+		*b = check_overflow_five(*b, index);
 	}
 }
 
