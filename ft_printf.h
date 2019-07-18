@@ -25,6 +25,7 @@ typedef	struct	s_f
 	int		pre;
 	int		wid;
 	int		flg;
+	int 	of;
 	char	f;
 }				t_f;
 
@@ -76,7 +77,7 @@ void			print_sign(long long number, int plu, int spc);
 void			minus(long long arg, int len, char *in);
 void			precision(long long arg, int len, char *in);
 void			zero_and_else(long long arg, char *in, int tmplen);
-int				oktotorp(unsigned long long arg, int len);
+int oktotorp(unsigned long long arg);
 void			int_char(va_list ap);
 void			int_short(va_list ap);
 void			int_int(va_list ap);
@@ -145,5 +146,16 @@ void			power_of_five(int pow, int p, int i, t_bigint *b);
 t_bigint		bigint_multy_five(t_bigint b);
 void			multy_two(t_bigint *res, t_bigint b, int i);
 void			finish(const char **s);
+void u_print_sign(int plu, int spc);
+void	u_minus(unsigned long long arg, int len, char *in);
+void	u_precision(unsigned long long arg, int len, char *in);
+void	u_zero_and_else(unsigned long long arg, char *in, int tmplen);
+void	o_minus(unsigned long long arg, int len, char *in);
+void	o_precision(unsigned long long arg, int len, char *in);
+void o_zero_and_else(char *in, int tmplen);
+void x_zero_and_else(char *in, int tmplen, unsigned long long arg);
+void	x_precision(unsigned long long arg, int len, char *in);
+void	x_minus(unsigned long long arg, int len, char *in);
+
 
 #endif

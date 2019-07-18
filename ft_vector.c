@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-static int g_len;
+int g_len;
 
 void		nullcpy(char *s1, const char *s2, size_t len)
 {

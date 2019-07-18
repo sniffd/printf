@@ -16,7 +16,7 @@ void	b_char(va_list ap)
 	if (tmplen <= 0)
 	{
 		tmplen = g_f->pre - len;
-		oktotorp(arg, len);
+		oktotorp(arg);
 		addcharn('0', tmplen);
 		if (!(!g_f->pre && !arg))
 			g_vector = ft_vector(g_vector, in, 5, 0);
@@ -45,7 +45,7 @@ void	b_short(va_list ap)
 	if (tmplen <= 0)
 	{
 		tmplen = g_f->pre - len;
-		oktotorp(arg, len);
+		oktotorp(arg);
 		addcharn('0', tmplen);
 		if (!(!g_f->pre && !arg))
 			g_vector = ft_vector(g_vector, in, 5, 0);
@@ -74,7 +74,7 @@ void	b_int(va_list ap)
 	if (tmplen <= 0)
 	{
 		tmplen = g_f->pre - len;
-		oktotorp(arg, len);
+		oktotorp(arg);
 		addcharn('0', tmplen);
 		if (!(!g_f->pre && !arg))
 			g_vector = ft_vector(g_vector, in, 5, 0);
@@ -103,7 +103,7 @@ void	b_long(va_list ap)
 	if (tmplen <= 0)
 	{
 		tmplen = g_f->pre - len;
-		oktotorp(arg, len);
+		oktotorp(arg);
 		addcharn('0', tmplen);
 		if (!(!g_f->pre && !arg))
 			g_vector = ft_vector(g_vector, in, 5, 0);
@@ -132,7 +132,7 @@ void	b_long_long(va_list ap)
 	if (tmplen <= 0)
 	{
 		tmplen = g_f->pre - len;
-		oktotorp(arg, len);
+		oktotorp(arg);
 		addcharn('0', tmplen);
 		if (!(!g_f->pre && !arg))
 			g_vector = ft_vector(g_vector, in, 5, 0);

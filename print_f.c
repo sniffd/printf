@@ -36,6 +36,8 @@ void	print_number(t_bigint f, t_bigint w, int index, int nmb_pos)
 	i--;
 	free(cluster);
 	print_part(w, i, -1);
+	if (g_f->okt && g_f->dot && !g_f->pre)
+		g_vector = ft_vector(g_vector, ".", 5, 0);
 	if (g_f->pre > 0)
 	{
 		g_vector = ft_vector(g_vector, ".", 5, 0);

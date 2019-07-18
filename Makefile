@@ -1,5 +1,5 @@
 NAME = libftprintf.a
-SRC = ft_printf.c addcharn.c big_hex.c c.c di.c f.c hex.c integer.c o.c octal.c oktotorp.c parse.c s.c x.c b.c binary.c di.c f.c f_round.c fraction.c fraction_path.c ft_vector.c func.c math_op_with_the_five.c multy_two.c nan.c percent.c print_f.c printf_strlen.c u.c uinteger.c whole.c select_round.c
+SRC = ft_printf.c addcharn.c big_hex.c c.c di.c f.c hex.c integer.c o.c octal.c oktotorp.c parse.c s.c x.c b.c binary.c di.c f.c f_round.c fraction.c fraction_path.c ft_vector.c func.c math_op_with_the_five.c multy_two.c nan.c percent.c print_f.c printf_strlen.c u.c uinteger.c whole.c select_round.c uflags.c oflags.c xflags.c
 
 OBJ = $(SRC:%.c=%.o)
 

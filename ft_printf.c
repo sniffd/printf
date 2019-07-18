@@ -3,6 +3,7 @@
 char	*g_vector = NULL;
 t_f		*g_f = NULL;
 int		g_eos = 0;
+extern int g_len;
 
 void	ft_else_else(const char **format, va_list ap)
 {
@@ -52,6 +53,7 @@ int		ft_printf(const char *format, ...)
 	if (g_vector)
 		ft_strdel(&g_vector);
 	free(g_f);
+	g_len = 0;
 	return (len);
 }
 //%[флаги][ширина][.точность][размер]тип

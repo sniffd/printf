@@ -44,7 +44,7 @@ void	big_x_short(va_list ap)
 	if (tmplen <= 0)
 	{
 		tmplen = g_f->pre - len;
-		oktotorp(arg, len);
+		oktotorp(arg);
 		addcharn('0', tmplen);
 		if (!(!g_f->pre && !arg))
 			g_vector = ft_vector(g_vector, in, 5, 0);
@@ -106,11 +106,11 @@ void	big_x_long(va_list ap)
 			g_vector = ft_vector(g_vector, in, 5, 0);
 	}
 	else if (g_f->min)
-		minus(arg, len, in);
+		u_minus(arg, len, in);
 	else if (g_f->dot)
-		precision(arg, len, in);
+		u_precision(arg, len, in);
 	else
-		zero_and_else(arg, in, tmplen);
+		u_zero_and_else(arg, in, tmplen);
 }
 
 void	big_x_long_long(va_list ap)
@@ -134,9 +134,9 @@ void	big_x_long_long(va_list ap)
 			g_vector = ft_vector(g_vector, in, 5, 0);
 	}
 	else if (g_f->min)
-		minus(arg, len, in);
+		u_minus(arg, len, in);
 	else if (g_f->dot)
-		precision(arg, len, in);
+		u_precision(arg, len, in);
 	else
-		zero_and_else(arg, in, tmplen);
+		u_zero_and_else(arg, in, tmplen);
 }

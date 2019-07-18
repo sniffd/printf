@@ -8,10 +8,14 @@
 #include <float.h>
 #include <math.h>
 #include <fcntl.h>
-//#include <opencl-c.h>
-//t_bigint	get_whole(size_t man, int pow);
-//t_bigint	pow_of_two(int pow);
-//t_bigint	get_fraction(size_t man, int pow);
+//#define TEST "%#.o\n", 0U
+//#define TEST "%x|%-x|%#x|%0x\n", 0U, 0U, 0U, 0U
+//#define TEST "%1.x|%-1.x|%#1.x|%01.x\n", 0U, 0U, 0U, 0U
+//#define TEST "%-#23x|%-023x|%#023x|%-#023x\n", 0U, 0U, 0U, 0U
+//#define TEST "%023®®®i\n", 1
+//#define TEST "%23.x|%-23.x|%#23.x|%023.x\n", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+#define TEST "%1.x|%-1.x|%#1.x|%01.x\n", 0U, 0U, 0U, 0U
+
 
 
 void test(char *str)
@@ -94,6 +98,19 @@ int	main(int argc, char **argv)
 //	ft_printf("%-10kw\n");
 //	ft_printf("%.10000Lf\n", d->d);
 //	printf("%.10000Lf", d->d);
+//	printf("%23.5d|%-23.5d|%+23.5d|% 23.5d|%023.5d\n", 0, 0, 0, 0, 0);
+//	ft_printf("%23.5d|%-23.5d|%+23.5d|% 23.5d|%023.5d\n", 0, 0, 0, 0, 0);
+//	printf("%d|%-d|%+d|% d|%0d\n", INT_MIN, INT_MIN, INT_MIN, INT_MIN, INT_MIN);
+//	ft_printf("%d|%-d|%+d|% d|%0d\n", INT_MIN, INT_MIN, INT_MIN, INT_MIN, INT_MIN);
+//	printf("%u|%-u|%0u\n", 0U, 0U, 0U);
+//	ft_printf("%u|%-u|%0u\n", 0U, 0U, 0U);
+//	ft_printf("%2.i\n", 1);
+	printf(TEST);
+	ft_printf(TEST);
+
+//	printf("%2.o", 0);
+//	printf("%2.i\n", 0);
+//	printf("%.0i", 1);
 //	printf("qwe%c%c%cddddsadasdasdas%csadasdsadasdsadasdasdasd\n", 0, 0, 0,0);
 //	ft_printf("qwe%c%c%cddddsadasdasdas%csadasdsadasdsadasdasdasd\n", 0, 0, 0, 0);
 //	ft_printf("%b\n", 1245123456);
@@ -121,12 +138,6 @@ int	main(int argc, char **argv)
 //	t_bigint b = get_whole(man, exp);
 //	pow_of_two(500);
 //	t_bigint huy = get_fraction(man, exp);
-	printf("%.f|%-.f|%+.f|% .f|%#.f|%0.f\n", DBL_MIN, DBL_MIN, DBL_MIN, DBL_MIN, DBL_MIN, DBL_MIN);
-	ft_printf("%.f|%-.f|%+.f|% .f|%#.f|%0.f\n", DBL_MIN, DBL_MIN, DBL_MIN, DBL_MIN, DBL_MIN, DBL_MIN);
-	printf("%-#23.5llX|%-023.5llX|%#023.5llX|%-#023.5llX\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
-	ft_printf("%-#23.5llX|%-023.5llX|%#023.5llX|%-#023.5llX\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
-	printf("%lu|%-lu|%0lu\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
-	ft_printf("%lu|%-lu|%0lu\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
 //	printf("%s\n", ft_itoa_base(d->l, 2));
 //	printf("\n%s\n", ft_itoa_base(exp, 2));
 //	printf("exp %i\n", exp);

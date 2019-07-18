@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int	oktotorp(unsigned long long arg, int len)
+int oktotorp(unsigned long long arg)
 {
 	if (g_f->okt || g_f->f == 'p')
 	{
@@ -14,8 +14,8 @@ int	oktotorp(unsigned long long arg, int len)
 			if (arg)
 				g_vector = ft_vector(g_vector, "0X", 5, 0);
 		}
-		else if (g_f->f == 'o' && (g_f->dot || (g_f->dot = 2)))
-			g_f->pre = g_f->pre > len || arg == 0 ? g_f->pre : len + 1;
+		else if (g_f->f == 'o')
+			g_f->of = 1;
 	}
 	return (1);
 }
