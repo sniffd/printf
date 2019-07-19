@@ -6,12 +6,15 @@ void	string(va_list ap)
 	char	*s;
 
 	s = va_arg(ap, char *);
+	if (!s)
+		s = "(null)";
 	len = ft_strlen(s);
+	len = (len > (size_t)g_f->pre) && g_f->dot ? g_f->pre : len;
 	if (g_f->wid)
 	{
 		if (g_f->min)
 		{
-			g_vector = ft_vector(g_vector, s, 5, 0);
+			g_vector = ft_vector(g_vector, s, 5, len);
 			addcharn(' ', (g_f->wid - len));
 		}
 		else
@@ -20,9 +23,10 @@ void	string(va_list ap)
 				addcharn('0', (g_f->wid - len));
 			else
 				addcharn(' ', (g_f->wid - len));
-			g_vector = ft_vector(g_vector, s, 5, 0);
+			if (len)
+				g_vector = ft_vector(g_vector, s, 5, len);
 		}
 	}
-	else
-		g_vector = ft_vector(g_vector, s, 5, 0);
+	else if (len)
+		g_vector = ft_vector(g_vector, s, 5, len);
 }

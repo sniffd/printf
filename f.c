@@ -1,7 +1,5 @@
 #include "ft_printf.h"
 
-void	f_round(t_bigint w, t_bigint f);
-
 void	norm_or_denorm(t_double d)
 {
 	t_bigint	whole;
@@ -23,7 +21,7 @@ void	norm_or_denorm(t_double d)
 	else
 	{
 		whole = get_whole((d.s.m >> (64 - (d.s.e - 16383 + 1))),
-						  (d.s.e - 16383 + 64 - (d.s.e - 16383 + 1)));
+				(d.s.e - 16383 + 64 - (d.s.e - 16383 + 1)));
 		fraction = get_fraction((d.s.m << (64 - (64 - (d.s.e - 16383 + 1))))
 				, d.s.e - 16383 - (d.s.e - 16383 + 1));
 	}
@@ -69,5 +67,4 @@ void	f_f(va_list ap)
 		f_long_double(ap);
 	else
 		f_double(ap);
-
 }

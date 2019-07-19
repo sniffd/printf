@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-void octal(va_list ap)
+void	octal(va_list ap)
 {
 	if (g_f->hh)
 		o_char(ap);
