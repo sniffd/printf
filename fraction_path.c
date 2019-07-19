@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fraction_path.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkeli <rkeli@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/19 14:13:30 by rkeli             #+#    #+#             */
+/*   Updated: 2019/07/19 14:13:30 by rkeli            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 t_bigint	check_overflow(t_bigint b, int i)
@@ -31,7 +43,7 @@ t_bigint	check_overflow_five(t_bigint b, int i)
 	return (b);
 }
 
-int 	if_ipo_equal_astart(t_bigint *res, t_bigint a, t_bigint b, int *i)
+int			if_ipo_equal_astart(t_bigint *res, t_bigint a, t_bigint b, int *i)
 {
 	size_t		mod;
 	size_t		div;
@@ -40,9 +52,11 @@ int 	if_ipo_equal_astart(t_bigint *res, t_bigint a, t_bigint b, int *i)
 	mod = (res->num[*i] - ZERO) % DIV;
 	if (*i + 1 == a.start)
 	{
-		res->num[*i + 1] = (res->num[*i + 1] - ZERO) + (a.num[*i + 1] - ZERO) + ZERO;
+		res->num[*i + 1] = (res->num[*i + 1] - ZERO) + (a.num[*i + 1] - ZERO)
+				+ ZERO;
 		res->num[*i] = mod + ZERO;
-		res->num[*i + 1] = (res->num[*i + 1] - ZERO) + (b.num[*i + 1] - ZERO) + ZERO;
+		res->num[*i + 1] = (res->num[*i + 1] - ZERO) + (b.num[*i + 1] - ZERO)
+				+ ZERO;
 		res->num[*i + 1] = (res->num[*i + 1] - ZERO) + div + ZERO;
 		(*i)++;
 		return (0);
@@ -50,7 +64,7 @@ int 	if_ipo_equal_astart(t_bigint *res, t_bigint a, t_bigint b, int *i)
 	return (1);
 }
 
-int 	if_lim(t_bigint *res, t_bigint a, t_bigint b, int *i)
+int			if_lim(t_bigint *res, t_bigint a, t_bigint b, int *i)
 {
 	char		biggest;
 	int			biggestlen;
@@ -65,7 +79,7 @@ int 	if_lim(t_bigint *res, t_bigint a, t_bigint b, int *i)
 	{
 		div = (res->num[*i] - ZERO) / DIV;
 		mod = (res->num[*i] - ZERO) % DIV;
-		if(if_ipo_equal_astart(res, a, b ,i))
+		if (if_ipo_equal_astart(res, a, b, i))
 		{
 			res->num[*i + 1] = (res->num[*i + 1] - ZERO) + div + ZERO;
 			res->num[*i] = mod + ZERO;
@@ -78,7 +92,7 @@ int 	if_lim(t_bigint *res, t_bigint a, t_bigint b, int *i)
 	return (1);
 }
 
-void	while_i_less_biggistlen(t_bigint *res, t_bigint a, t_bigint b,
+void		while_i_less_biggistlen(t_bigint *res, t_bigint a, t_bigint b,
 								int i)
 {
 	char	biggest;
@@ -91,7 +105,8 @@ void	while_i_less_biggistlen(t_bigint *res, t_bigint a, t_bigint b,
 	while (i < biggestlen)
 	{
 		if (i < lowestlen)
-			res->num[i] = (res->num[i] - ZERO) + (a.num[i] - ZERO) + (b.num[i] - ZERO) + ZERO;
+			res->num[i] = (res->num[i] - ZERO) + (a.num[i] - ZERO) + (b.num[i]
+					- ZERO) + ZERO;
 		else
 		{
 			if (biggest == 'a')

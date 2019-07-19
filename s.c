@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   s.c                                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkeli <rkeli@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/19 14:15:33 by rkeli             #+#    #+#             */
+/*   Updated: 2019/07/19 14:15:33 by rkeli            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	string(va_list ap)
@@ -19,10 +31,8 @@ void	string(va_list ap)
 		}
 		else
 		{
-			if (g_f->zer)
-				addcharn('0', (g_f->wid - len));
-			else
-				addcharn(' ', (g_f->wid - len));
+			g_f->zer ? addcharn('0', (g_f->wid - len))
+			: addcharn(' ', (g_f->wid - len));
 			if (len)
 				g_vector = ft_vector(g_vector, s, 5, len);
 		}

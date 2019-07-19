@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   xflags.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkeli <rkeli@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/19 14:16:16 by rkeli             #+#    #+#             */
+/*   Updated: 2019/07/19 14:16:16 by rkeli            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	x_minus(unsigned long long arg, int len, char *in)
@@ -8,10 +20,10 @@ void	x_minus(unsigned long long arg, int len, char *in)
 	if (tmplen <= 0)
 	{
 		oktotorp(arg);
-//		if (!(!arg && g_f->dot && !g_f->pre) && !(!arg && g_f->okt))
 		if (!(!arg && g_f->dot && !g_f->pre))
 			g_vector = ft_vector(g_vector, in, 5, 0);
-		tmplen = g_f->wid - (len * !(!arg && g_f->dot && !g_f->pre)) - (g_f->f == 'p'|| (g_f->okt && arg)) * 2;
+		tmplen = g_f->wid - (len * !(!arg && g_f->dot && !g_f->pre))
+				- (g_f->f == 'p' || (g_f->okt && arg)) * 2;
 		addcharn(' ', tmplen);
 	}
 	else
@@ -29,9 +41,11 @@ void	x_precision(unsigned long long arg, int len, char *in)
 	int	tmplen;
 
 	if (g_f->pre >= len)
-		tmplen = g_f->wid - g_f->pre + (!arg && g_f->dot && !g_f->pre) - ((g_f->okt || g_f->f == 'p') && g_f->dot && arg) * 2;
+		tmplen = g_f->wid - g_f->pre + (!arg && g_f->dot && !g_f->pre)
+				- ((g_f->okt || g_f->f == 'p') && g_f->dot && arg) * 2;
 	else
-		tmplen = g_f->wid - len + (!arg && g_f->dot && !g_f->pre) - ((g_f->okt || g_f->f == 'p') && g_f->dot && arg) * 2;
+		tmplen = g_f->wid - len + (!arg && g_f->dot && !g_f->pre)
+				- ((g_f->okt || g_f->f == 'p') && g_f->dot && arg) * 2;
 	if (tmplen <= 0)
 	{
 		oktotorp(arg);
@@ -51,7 +65,7 @@ void	x_precision(unsigned long long arg, int len, char *in)
 	}
 }
 
-void x_zero_and_else(char *in, int tmplen, unsigned long long arg)
+void	x_zero_and_else(char *in, int tmplen, unsigned long long arg)
 {
 	if (g_f->zer && !(g_f->dot))
 	{

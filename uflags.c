@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   uflags.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkeli <rkeli@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/19 14:15:46 by rkeli             #+#    #+#             */
+/*   Updated: 2019/07/19 14:15:46 by rkeli            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-void u_print_sign(int plu, int spc)
+void	u_print_sign(int plu, int spc)
 {
 	if (plu)
 		g_vector = ft_vector(g_vector, "+", 5, 0);
@@ -20,7 +32,7 @@ void	u_minus(unsigned long long arg, int len, char *in)
 		in = !(g_f->dot && !arg) ? in : " ";
 		g_vector = ft_vector(g_vector, in, 5, 0);
 		tmplen = (g_f->plu || g_f->spc) ? g_f->wid - len - 1 :
-				 g_f->wid - len;
+				g_f->wid - len;
 		addcharn(' ', tmplen);
 	}
 	else
@@ -28,7 +40,7 @@ void	u_minus(unsigned long long arg, int len, char *in)
 		addcharn('0', tmplen);
 		g_vector = ft_vector(g_vector, in, 5, 0);
 		tmplen = (g_f->plu || g_f->spc) ? g_f->wid - g_f->pre - 1 :
-				 g_f->wid - g_f->pre;
+				g_f->wid - g_f->pre;
 		addcharn(' ', tmplen);
 	}
 }
@@ -39,7 +51,7 @@ void	u_precision(unsigned long long arg, int len, char *in)
 
 	if (g_f->pre >= len)
 		tmplen = (g_f->plu || g_f->spc) ? g_f->wid - g_f->pre - 1 :
-				 g_f->wid - g_f->pre;
+				g_f->wid - g_f->pre;
 	else
 		tmplen = (g_f->plu || g_f->spc) ? g_f->wid - len - 1 +
 			(arg == 0 && g_f->dot) : g_f->wid - len + (arg == 0 && g_f->dot);
@@ -64,9 +76,6 @@ void	u_precision(unsigned long long arg, int len, char *in)
 
 void	u_zero_and_else(unsigned long long arg, char *in, int tmplen)
 {
-	int	len;
-
-	len = (int)ft_strlen(in);
 	if (g_f->zer && !(g_f->dot))
 	{
 		u_print_sign(g_f->plu, g_f->spc);

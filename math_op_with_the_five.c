@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   math_op_with_the_five.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkeli <rkeli@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/19 14:14:09 by rkeli             #+#    #+#             */
+/*   Updated: 2019/07/19 14:16:18 by rkeli            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 t_bigint	bigint_multy_five(t_bigint b)
@@ -6,7 +18,8 @@ t_bigint	bigint_multy_five(t_bigint b)
 	int			i;
 
 	res.len = b.start + 2;
-	res.num = (size_t *)ft_memalloc(sizeof(size_t) * res.len);
+	if (!(res.num = (size_t *)ft_memalloc(sizeof(size_t) * res.len)))
+		exit(0);
 	res.start = b.start;
 	i = b.start + 1;
 	while (i < res.len)
@@ -55,7 +68,8 @@ t_bigint	pow_of_five(int pow)
 
 	p = 0;
 	b.len = (ft_abs(pow) / 18) + 2;
-	b.num = (size_t *)ft_memalloc(sizeof(size_t) * b.len);
+	if (!(b.num = (size_t *)ft_memalloc(sizeof(size_t) * b.len)))
+		exit(0);
 	b.num[0] = 1 + ZERO;
 	b.start = 0;
 	i = 1;

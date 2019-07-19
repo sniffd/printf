@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   di.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkeli <rkeli@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/19 14:13:04 by rkeli             #+#    #+#             */
+/*   Updated: 2019/07/19 14:13:04 by rkeli            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	print_sign(long long number, int plu, int spc)
@@ -22,7 +34,8 @@ void	minus(long long arg, int len, char *in)
 		if (g_f->of)
 			g_vector = ft_vector(g_vector, "0", 5, 1);
 		in = (arg || (!g_f->dot && !g_f->okt) || g_f->pre) ? in : " ";
-		if (!(g_f->of && !arg && g_f->dot && !g_f->pre) || (arg || (!g_f->dot && !g_f->okt) || g_f->pre))
+		if (!(g_f->of && !arg && g_f->dot && !g_f->pre)
+		|| (arg || (!g_f->dot && !g_f->okt) || g_f->pre))
 			g_vector = ft_vector(g_vector, in, 5, 0);
 		tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1 :
 			g_f->wid - len;
@@ -49,24 +62,7 @@ void	precision(long long arg, int len, char *in)
 		tmplen = (g_f->plu || g_f->spc || arg < 0) ? g_f->wid - len - 1 +
 			(arg == 0 && g_f->dot) : g_f->wid - len + (arg == 0 && g_f->dot) -
 			(g_f->f == 'o' && g_f->okt);
-	if (tmplen <= 0 && oktotorp(arg))
-	{
-		tmplen = (g_f->of && g_f->pre - len < 0) ? 1 : g_f->pre - len;
-		print_sign(arg, g_f->plu, g_f->spc);
-		addcharn('0', tmplen);
-		if (!(!g_f->pre && !arg && g_f->dot))
-			g_vector = ft_vector(g_vector, in, 5, 0);
-	}
-	else
-	{
-		addcharn(' ', tmplen);
-		tmplen = (g_f->of && g_f->pre - len < 0) ? 1 : g_f->pre - len;
-		print_sign(arg, g_f->plu, g_f->spc);
-		oktotorp(arg);
-		addcharn('0', tmplen);
-		in = (arg || (!g_f->dot && !g_f->okt) || g_f->pre) ? in : "";
-		g_vector = ft_vector(g_vector, in, 5, 0);
-	}
+	if_else_precision(tmplen, arg, len, in);
 }
 
 void	zero_and_else(long long arg, char *in, int tmplen)

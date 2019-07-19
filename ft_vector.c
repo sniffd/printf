@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_vector.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkeli <rkeli@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/19 14:13:42 by rkeli             #+#    #+#             */
+/*   Updated: 2019/07/19 14:13:42 by rkeli            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int g_len;
@@ -76,7 +88,8 @@ char		*ft_vector(char *vector, const char *str, size_t i_size, size_t len)
 		size = i_size;
 	if (!vector)
 	{
-		size = ft_strlen(str) + (g_f && g_f->flg) >= size ? ft_strlen(str) + (g_f && g_f->flg) : size;
+		size = ft_strlen(str) + (g_f && g_f->flg) >= size ? ft_strlen(str)
+				+ (g_f && g_f->flg) : size;
 		if (!(ret = ft_memalloc(size + 1)))
 			exit(0);
 		if (!len)

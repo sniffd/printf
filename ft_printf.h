@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkeli <rkeli@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/19 14:11:59 by rkeli             #+#    #+#             */
+/*   Updated: 2019/07/19 14:11:59 by rkeli            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
@@ -25,7 +37,7 @@ typedef	struct	s_f
 	int		pre;
 	int		wid;
 	int		flg;
-	int 	of;
+	int		of;
 	char	f;
 }				t_f;
 
@@ -77,7 +89,7 @@ void			print_sign(long long number, int plu, int spc);
 void			minus(long long arg, int len, char *in);
 void			precision(long long arg, int len, char *in);
 void			zero_and_else(long long arg, char *in, int tmplen);
-int oktotorp(unsigned long long arg);
+int				oktotorp(unsigned long long arg);
 void			int_char(va_list ap);
 void			int_short(va_list ap);
 void			int_int(va_list ap);
@@ -126,16 +138,16 @@ void			b_int(va_list ap);
 void			b_long(va_list ap);
 void			b_long_long(va_list ap);
 void			binary(va_list ap);
-size_t			printf_strlen(const char *s, int n);
 char			*ft_vector(char *vector, const char *str, size_t i_size,
 																size_t len);
 void			f_round(t_bigint w, t_bigint f);
-void			fraction_select_round(t_bigint *f, t_bigint *w, t_round *r, char flag);
+void			fraction_select_round(t_bigint *f, t_bigint *w, t_round *r,
+															char flag);
 void			whole_select_round(t_bigint *f, t_bigint *w, t_round *r,
 																char flag);
 size_t			get_mask(int i);
 void			math_round(t_bigint *b, t_bigint *w, t_round *r, char flag);
-void			check_zero(t_bigint *f, t_bigint *w, t_round *r, int len, char flag);
+void			check_zero(t_bigint *f, t_bigint *w, t_round *r, int len);
 void			while_i_less_biggistlen(t_bigint *res, t_bigint a, t_bigint b,
 																int i);
 int				if_lim(t_bigint *res, t_bigint a, t_bigint b, int *i);
@@ -145,16 +157,22 @@ void			power_of_five(int pow, int p, int i, t_bigint *b);
 t_bigint		bigint_multy_five(t_bigint b);
 void			multy_two(t_bigint *res, t_bigint b, int i);
 void			finish(const char **s);
-void u_print_sign(int plu, int spc);
-void	u_minus(unsigned long long arg, int len, char *in);
-void	u_precision(unsigned long long arg, int len, char *in);
-void	u_zero_and_else(unsigned long long arg, char *in, int tmplen);
-void	o_minus(unsigned long long arg, int len, char *in);
-void	o_precision(unsigned long long arg, int len, char *in);
-void o_zero_and_else(char *in, int tmplen);
-void x_zero_and_else(char *in, int tmplen, unsigned long long arg);
-void	x_precision(unsigned long long arg, int len, char *in);
-void	x_minus(unsigned long long arg, int len, char *in);
-
-
+void			u_print_sign(int plu, int spc);
+void			u_minus(unsigned long long arg, int len, char *in);
+void			u_precision(unsigned long long arg, int len, char *in);
+void			u_zero_and_else(unsigned long long arg, char *in, int tmplen);
+void			o_minus(unsigned long long arg, int len, char *in);
+void			o_precision(unsigned long long arg, int len, char *in);
+void			o_zero_and_else(char *in, int tmplen);
+void			x_zero_and_else(char *in, int tmplen, unsigned long long arg);
+void			x_precision(unsigned long long arg, int len, char *in);
+void			x_minus(unsigned long long arg, int len, char *in);
+void			chck_flags(unsigned int arg, int len, char *in, int tmplen);
+void			if_else_precision(int tmplen, long long arg, int len, char *in);
+void			octl_chck_flags(int tmplen, unsigned arg, int len, char *in);
+void			o_if_else_precison(int tmplen, unsigned long long arg, int len,
+																	char *in);
+void			if_wid_less_zero(void);
+void			print_part(t_bigint b, int i, int j);
+void			okt_and_dot_and_pre(void);
 #endif

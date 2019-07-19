@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkeli <rkeli@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/19 14:15:00 by rkeli             #+#    #+#             */
+/*   Updated: 2019/07/19 14:15:00 by rkeli            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static void	parse_flags(const char s, t_f *f)
@@ -37,10 +49,7 @@ static void	parse_pre_or_wid(const char *s, t_f *f, va_list ap, int flag)
 		if (S == '.')
 		{
 			f->dot = 1;
-			if (*(s + 1) == '*')
-				f->pre = va_arg(ap, int);
-			else
-				f->pre = ft_atoi(s + 1);
+			f->pre = (*(s + 1) == '*' ? va_arg(ap, int) : ft_atoi(s + 1));
 			if (f->pre < 0)
 			{
 				f->dot = 0;
@@ -56,14 +65,8 @@ static void	parse_pre_or_wid(const char *s, t_f *f, va_list ap, int flag)
 			g_f->flg = 1;
 		}
 		else if (!((f->wid) && !f->flg))
-		{
 			f->wid = ft_atoi(s);
-		}
-		if (g_f->wid < 0)
-		{
-			g_f->wid = -g_f->wid;
-			g_f->min = 1;
-		}
+		if_wid_less_zero();
 	}
 }
 

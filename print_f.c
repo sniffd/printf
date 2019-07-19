@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_f.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkeli <rkeli@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/19 14:15:09 by rkeli             #+#    #+#             */
+/*   Updated: 2019/07/19 14:15:09 by rkeli            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	f_print_sign(char sign, int plu, int spc)
@@ -36,8 +48,7 @@ void	print_number(t_bigint f, t_bigint w, int index, int nmb_pos)
 	i--;
 	free(cluster);
 	print_part(w, i, -1);
-	if (g_f->okt && g_f->dot && !g_f->pre)
-		g_vector = ft_vector(g_vector, ".", 5, 0);
+	okt_and_dot_and_pre();
 	if (g_f->pre > 0)
 	{
 		g_vector = ft_vector(g_vector, ".", 5, 0);
@@ -50,8 +61,7 @@ void	print_number(t_bigint f, t_bigint w, int index, int nmb_pos)
 			g_vector = ft_vector(g_vector, cluster + 1, 5, nmb_pos);
 		free(cluster);
 	}
-	if (g_f->pre > flen)
-		addcharn('0', g_f->pre - flen);
+	g_f->pre > flen ? addcharn('0', g_f->pre - flen) : 0;
 }
 
 void	select_condition(t_bigint f, t_bigint w, int nmb_pos, int index)
@@ -60,7 +70,8 @@ void	select_condition(t_bigint f, t_bigint w, int nmb_pos, int index)
 	int		len;
 
 	wlen = w.start * CLUSTER_SIZE + ft_numlen(w.num[w.start]);
-	len = g_f->wid - (wlen + g_f->pre + 1 * !(g_f->dot && !g_f->pre) + (g_f->plu || g_f->spc || w.sign));
+	len = g_f->wid - (wlen + g_f->pre + 1 * !(g_f->dot && !g_f->pre)
+			+ (g_f->plu || g_f->spc || w.sign));
 	if (g_f->min)
 	{
 		f_print_sign(w.sign, g_f->plu, g_f->spc);

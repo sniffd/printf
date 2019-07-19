@@ -1,9 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   f_round.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkeli <rkeli@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/19 14:13:19 by rkeli             #+#    #+#             */
+/*   Updated: 2019/07/19 14:13:19 by rkeli            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
+
+char	g_flag = 0;
 
 void	math_round(t_bigint *b, t_bigint *w, t_round *r, char flag)
 {
-	size_t mask;
-	unsigned int 	overflow;
+	size_t			mask;
+	unsigned int	overflow;
 
 	mask = get_mask(ft_numlen(b->num[r->index])) / 10;
 	overflow = b->num[r->index] / mask;
@@ -32,24 +46,24 @@ void	printf_round(t_bigint *b, int index, size_t mask, char flag)
 	}
 }
 
-void	check_zero(t_bigint *f, t_bigint *w, t_round *r, int len, char flag)
+void	check_zero(t_bigint *f, t_bigint *w, t_round *r, int len)
 {
 	int	i;
 
 	i = r->index;
 	if (r->nmb_pos != len && f->num[r->index] % (r->mask / 10))
-		math_round(f, w, r, flag);
+		math_round(f, w, r, g_flag);
 	else
 	{
 		while (i > 0)
 		{
 			if ((f->num[--i] - ZERO))
 			{
-				math_round(f, w, r, flag);
+				math_round(f, w, r, g_flag);
 				return ;
 			}
 		}
-		printf_round(f, r->index, r->mask, flag);
+		printf_round(f, r->index, r->mask, g_flag);
 	}
 }
 

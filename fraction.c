@@ -1,27 +1,16 @@
-#include "ft_printf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fraction.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkeli <rkeli@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/19 14:13:25 by rkeli             #+#    #+#             */
+/*   Updated: 2019/07/19 14:16:18 by rkeli            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-//t_bigint		bigint_add_f(t_bigint a, t_bigint b)
-//{
-//	t_bigint	res;
-//	char		biggest;
-//	int			biggestlen;
-//	int			i;
-//
-//	biggest = a.start > b.start ? 'a' : 'b';
-//	biggestlen = (biggest == 'a' ? a.start + 1 : b.start + 1);
-//	res.num = ft_memalloc(sizeof(size_t) * (biggestlen + 1));
-//	res.len = biggestlen + 1;
-//	i = 0;
-//	res.start = 0;
-//	while (i < res.len)
-//	{
-//		res.num[i] = ZERO;
-//		i++;
-//	}
-//	while_i_less_biggistlen(&res, a, b, 0);
-//	free(a.num);
-//	return (res);
-//}
+#include "ft_printf.h"
 
 static t_bigint	bigint_add_f(t_bigint a, t_bigint b)
 {
@@ -32,7 +21,8 @@ static t_bigint	bigint_add_f(t_bigint a, t_bigint b)
 
 	biggest = a.start > b.start ? 'a' : 'b';
 	biggestlen = (biggest == 'a' ? a.start + 1 : b.start + 1);
-	res.num = ft_memalloc(sizeof(size_t) * (biggestlen + 1));
+	if (!(res.num = ft_memalloc(sizeof(size_t) * (biggestlen + 1))))
+		exit(0);
 	res.len = biggestlen + 1;
 	i = 0;
 	res.start = 0;
@@ -53,7 +43,8 @@ static t_bigint	bigint_multy_ten(t_bigint b)
 
 	res.start = b.start;
 	res.len = b.len + 1;
-	res.num = ft_memalloc(sizeof(size_t) * res.len);
+	if (!(res.num = ft_memalloc(sizeof(size_t) * res.len)))
+		exit(0);
 	i = b.start;
 	while (i > 0)
 	{
@@ -118,7 +109,8 @@ t_bigint		get_fraction(size_t man, int pow)
 	size_t		mant;
 
 	pow = -pow;
-	res.num = (size_t *)ft_memalloc(sizeof(size_t) * (pow / 18 + 1));
+	if (!(res.num = (size_t *)ft_memalloc(sizeof(size_t) * (pow / 18 + 1))))
+		exit(0);
 	res.num[0] = 1 + ZERO;
 	res.len = pow / 18 + 1;
 	res.start = 0;

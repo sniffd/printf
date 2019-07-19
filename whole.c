@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   whole.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkeli <rkeli@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/19 14:16:02 by rkeli             #+#    #+#             */
+/*   Updated: 2019/07/19 14:16:18 by rkeli            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static t_bigint	pow_of_two(int pow)
@@ -8,7 +20,8 @@ static t_bigint	pow_of_two(int pow)
 
 	p = -1;
 	b.len = pow / 59 + 1;
-	b.num = (size_t *)ft_memalloc(sizeof(size_t) * b.len);
+	if (!(b.num = (size_t *)ft_memalloc(sizeof(size_t) * b.len)))
+		exit(0);
 	b.num[0] = ZERO + 1;
 	b.start = 0;
 	i = 0;
@@ -67,7 +80,8 @@ static t_bigint	bigint_add(t_bigint a, t_bigint b)
 
 	biggest = a.start > b.start ? 'a' : 'b';
 	biggestlen = (biggest == 'a' ? a.start + 1 : b.start + 1);
-	res.num = ft_memalloc(sizeof(size_t) * (biggestlen + 1));
+	if (!(res.num = ft_memalloc(sizeof(size_t) * (biggestlen + 1))))
+		exit(0);
 	res.len = biggestlen + 1;
 	i = 0;
 	res.start = 0;
@@ -87,7 +101,8 @@ static t_bigint	bigint_multy_two(t_bigint b)
 	int			i;
 
 	res.len = b.start + 2;
-	res.num = (size_t *)ft_memalloc(sizeof(size_t) * res.len);
+	if (!(res.num = (size_t *)ft_memalloc(sizeof(size_t) * res.len)))
+		exit(0);
 	res.start = b.start;
 	i = b.start + 1;
 	while (i >= 0)
@@ -108,7 +123,8 @@ t_bigint		get_whole(size_t man, int pow)
 	size_t		mant;
 	char		bit;
 
-	res.num = (size_t *)ft_memalloc(8);
+	if (!(res.num = (size_t *)ft_memalloc(8)))
+		exit(0);
 	res.len = 0;
 	res.start = 0;
 	res.num[0] = ZERO;
