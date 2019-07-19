@@ -33,7 +33,7 @@ struct			s_double
 {
 	size_t					m;
 	unsigned short			e:15;
-	char					s:1;
+	unsigned char			s:1;
 };
 
 typedef union	u_double
@@ -102,7 +102,7 @@ void			octal(va_list ap);
 void			hex(va_list ap);
 void			big_hex(va_list ap);
 void			string(va_list ap);
-void			character(va_list ap, char *ch);
+void			character(va_list ap, const char *ch);
 t_bigint		get_fraction(size_t man, int pow);
 t_bigint		get_whole(size_t man, int pow);
 void			f_long_double(va_list ap);
@@ -130,16 +130,15 @@ size_t			printf_strlen(const char *s, int n);
 char			*ft_vector(char *vector, const char *str, size_t i_size,
 																size_t len);
 void			f_round(t_bigint w, t_bigint f);
-void			fraction_select_round(t_bigint *f, t_round *r, char flag);
+void			fraction_select_round(t_bigint *f, t_bigint *w, t_round *r, char flag);
 void			whole_select_round(t_bigint *f, t_bigint *w, t_round *r,
 																char flag);
 size_t			get_mask(int i);
-void			math_round(t_bigint *b, t_round *r, char flag);
-void			check_zero(t_bigint *f, t_round *r, int len, char flag);
+void			math_round(t_bigint *b, t_bigint *w, t_round *r, char flag);
+void			check_zero(t_bigint *f, t_bigint *w, t_round *r, int len, char flag);
 void			while_i_less_biggistlen(t_bigint *res, t_bigint a, t_bigint b,
 																int i);
-int				if_i_biggest_lim(t_bigint *res, int i, t_bigint a, t_bigint b);
-int				if_or_else(t_bigint *res, t_bigint a, t_bigint b, int *i);
+int				if_lim(t_bigint *res, t_bigint a, t_bigint b, int *i);
 t_bigint		check_overflow(t_bigint b, int i);
 t_bigint		pow_of_five(int pow);
 void			power_of_five(int pow, int p, int i, t_bigint *b);

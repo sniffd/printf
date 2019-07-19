@@ -8,14 +8,14 @@
 #include <float.h>
 #include <math.h>
 #include <fcntl.h>
-//#define TEST "%#.o\n", 0U
-//#define TEST "%x|%-x|%#x|%0x\n", 0U, 0U, 0U, 0U
-//#define TEST "%1.x|%-1.x|%#1.x|%01.x\n", 0U, 0U, 0U, 0U
-//#define TEST "%-#23x|%-023x|%#023x|%-#023x\n", 0U, 0U, 0U, 0U
-//#define TEST "%023®®®i\n", 1
-//#define TEST "%23.x|%-23.x|%#23.x|%023.x\n", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
-#define TEST "%1.x|%-1.x|%#1.x|%01.x\n", 0U, 0U, 0U, 0U
-
+//#define TEST "%s|%-s|%23s|%.5s|%.50s|%-23s|%-.5s|%-.50s|%23.5s|%23.50s|%-23.5s|%-23.50s\n", "wi32x-3vx++===98234z1esfatr", "wi32x-3vx++===98234z1esfatr", "wi32x-3vx++===98234z1esfatr", "wi32x-3vx++===98234z1esfatr", "wi32x-3vx++===98234z1esfatr", "wi32x-3vx++===98234z1esfatr", "wi32x-3vx++===98234z1esfatr", "wi32x-3vx++===98234z1esfatr", "wi32x-3vx++===98234z1esfatr", "wi32x-3vx++===98234z1esfatr", "wi32x-3vx++===98234z1esfatr", "wi32x-3vx++===98234z1esfatr"
+//#define TEST "%30p\n", "Random string"
+//#define TEST "%-30.25p\n", "Random string"
+//#define TEST "%.lf|%-.lf|%+.lf|% .lf|%#.lf|%0.lf\n", 38546.5849, 38546.5849, 38546.5849, 38546.5849, 38546.5849, 38546.5849
+//#define TEST "%15.8f|%-15.8f|%+15.8f|% 15.8f|%#15.8f|%015.8f\n", -42., -42., -42., -42., -42., -42.
+//#define TEST "%.f|%.1f|%.2f|%.5f|%.12f\n", 0.000099, 0.000099, 0.000099, 0.000099, 0.000099
+//#define TEST "%.f|%.1f|%.2f|%.5f|%.12f\n", 999.99999, 999.99999, 999.99999, 999.99999, 999.99999
+#define TEST "%s|%-s|%23s|%.5s|%.50s|%-23s|%-.5s|%-.50s|%23.5s|%23.50s|%-23.5s|%-23.50s\n", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
 
 
 void test(char *str)
@@ -105,8 +105,11 @@ int	main(int argc, char **argv)
 //	printf("%u|%-u|%0u\n", 0U, 0U, 0U);
 //	ft_printf("%u|%-u|%0u\n", 0U, 0U, 0U);
 //	ft_printf("%2.i\n", 1);
+//	ft_printf("%s|%-s|%23s|%.5s|%.50s|%-23s|%-.5s|%-.50s|%23.5s|%23.50s|%-23.5s|%-23.50s\", \"wi32x-3vx++===98234z1esfatr\", \"wi32x-3vx++===98234z1esfatr\", \"wi32x-3vx++===98234z1esfatr\", \"wi32x-3vx++===98234z1esfatr\", \"wi32x-3vx++===98234z1esfatr\", \"wi32x-3vx++===98234z1esfatr\", \"wi32x-3vx++===98234z1esfatr\", \"wi32x-3vx++===98234z1esfatr\", \"wi32x-3vx++===98234z1esfatr\", \"wi32x-3vx++===98234z1esfatr\", \"wi32x-3vx++===98234z1esfatr\", \"wi32x-3vx++===98234z1esfatr\");
 	printf(TEST);
 	ft_printf(TEST);
+//	printf("%.16383Lf\n", LDBL_MIN);
+//	ft_printf("%.16383Lf\n", LDBL_MIN);
 
 //	printf("%2.o", 0);
 //	printf("%2.i\n", 0);

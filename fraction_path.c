@@ -31,53 +31,55 @@ t_bigint	check_overflow_five(t_bigint b, int i)
 	return (b);
 }
 
-int			if_or_else(t_bigint *res, t_bigint a, t_bigint b, int *i)
+int 	if_ipo_equal_astart(t_bigint *res, t_bigint a, t_bigint b, int *i)
 {
-	size_t	mod;
-	size_t	div;
+	size_t		mod;
+	size_t		div;
 
 	div = (res->num[*i] - ZERO) / DIV;
 	mod = (res->num[*i] - ZERO) % DIV;
 	if (*i + 1 == a.start)
 	{
-		res->num[*i + 1] = (res->num[*i + 1] - ZERO) + (a.num[*i + 1] - ZERO)
-				+ ZERO;
+		res->num[*i + 1] = (res->num[*i + 1] - ZERO) + (a.num[*i + 1] - ZERO) + ZERO;
 		res->num[*i] = mod + ZERO;
-		res->num[*i + 1] = (res->num[*i + 1] - ZERO) + (b.num[*i + 1] - ZERO)
-				+ ZERO;
+		res->num[*i + 1] = (res->num[*i + 1] - ZERO) + (b.num[*i + 1] - ZERO) + ZERO;
 		res->num[*i + 1] = (res->num[*i + 1] - ZERO) + div + ZERO;
 		(*i)++;
-		return (1);
-	}
-	else
-	{
-		res->num[*i + 1] = (res->num[*i + 1] - ZERO) + div + ZERO;
-		res->num[*i] = mod + ZERO;
 		return (0);
 	}
+	return (1);
 }
 
-int			if_i_biggest_lim(t_bigint *res, int i, t_bigint a, t_bigint b)
+int 	if_lim(t_bigint *res, t_bigint a, t_bigint b, int *i)
 {
-	char	biggest;
-	int		biggestlen;
+	char		biggest;
+	int			biggestlen;
+	size_t		mod;
+	size_t		div;
+	int			f;
 
 	biggest = a.start > b.start ? 'a' : 'b';
 	biggestlen = (biggest == 'a' ? a.start + 1 : b.start + 1);
-	if (res->num[i] > LIM)
+	f = 0;
+	if (res->num[*i] > LIM)
 	{
-		if (!if_or_else(res, a, b, &i) && i + 1 == biggestlen)
-			res->start = i + 1;
+		div = (res->num[*i] - ZERO) / DIV;
+		mod = (res->num[*i] - ZERO) % DIV;
+		if(if_ipo_equal_astart(res, a, b ,i))
+		{
+			res->num[*i + 1] = (res->num[*i + 1] - ZERO) + div + ZERO;
+			res->num[*i] = mod + ZERO;
+		}
 		else
-			res->start = i;
-		return (1);
-	}
-	else
+			f = 1;
+		res->start = (!f && *i + 1 == biggestlen ? *i + 1 : *i);
 		return (0);
+	}
+	return (1);
 }
 
-void		while_i_less_biggistlen(t_bigint *res, t_bigint a, t_bigint b,
-		int i)
+void	while_i_less_biggistlen(t_bigint *res, t_bigint a, t_bigint b,
+								int i)
 {
 	char	biggest;
 	int		biggestlen;
@@ -89,8 +91,7 @@ void		while_i_less_biggistlen(t_bigint *res, t_bigint a, t_bigint b,
 	while (i < biggestlen)
 	{
 		if (i < lowestlen)
-			res->num[i] = (res->num[i] - ZERO) + (a.num[i] - ZERO) + (b.num[i]
-					- ZERO) + ZERO;
+			res->num[i] = (res->num[i] - ZERO) + (a.num[i] - ZERO) + (b.num[i] - ZERO) + ZERO;
 		else
 		{
 			if (biggest == 'a')
@@ -98,7 +99,7 @@ void		while_i_less_biggistlen(t_bigint *res, t_bigint a, t_bigint b,
 			else
 				res->num[i] = (res->num[i] - ZERO) + (b.num[i] - ZERO) + ZERO;
 		}
-		if (i > res->start && !if_i_biggest_lim(res, i, a, b))
+		if (if_lim(res, a, b, &i) && i > res->start)
 			res->start++;
 		i++;
 	}

@@ -26,7 +26,7 @@ size_t	get_mask(int i)
 	return (mask[i]);
 }
 
-void	fraction_select_round(t_bigint *f, t_round *r, char flag)
+void	fraction_select_round(t_bigint *f, t_bigint *w, t_round *r, char flag)
 {
 	int	len;
 
@@ -36,20 +36,21 @@ void	fraction_select_round(t_bigint *f, t_round *r, char flag)
 					f->num[r->index - 1] / 100000000000000000 % 10 :
 					f->num[r->index] % r->mask / (r->mask / 10);
 	if (r->next_digit != 5)
-		math_round(f, r, flag);
+		math_round(f, w, r, flag);
 	else
-		check_zero(f, r, len, flag);
+		check_zero(f, w, r, len, flag);
 }
 
 void	whole_select_round(t_bigint *f, t_bigint *w, t_round *r, char flag)
 {
 	int f_digit;
-
+	if (ft_numlen(f->num[f->start]) == 1 && f->start)
+		f->start--;
 	r->mask = get_mask(ft_numlen(f->num[f->start]) - 1);
 	f_digit = f->num[f->start] % r->mask / (r->mask / 10);
 	r->next_digit = f_digit;
 	if (f_digit != 5)
-		math_round(w, r, flag);
+		math_round(w, w, r, flag);
 	else
-		check_zero(w, r, -255, flag);
+		check_zero(w, w, r, -255, flag);
 }

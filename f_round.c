@@ -1,11 +1,18 @@
 #include "ft_printf.h"
 
-void	math_round(t_bigint *b, t_round *r, char flag)
+void	math_round(t_bigint *b, t_bigint *w, t_round *r, char flag)
 {
+	size_t mask;
+	unsigned int 	overflow;
+
+	mask = get_mask(ft_numlen(b->num[r->index])) / 10;
+	overflow = b->num[r->index] / mask;
 	if (r->next_digit > 4)
 	{
 		b->num[r->index] = !flag ? b->num[r->index] + 1
 				: b->num[r->index] + r->mask;
+		if (flag && r->index == b->start && overflow != b->num[r->index] / mask)
+			w->num[0]++;
 		*b = check_overflow_five(*b, r->index);
 	}
 }
@@ -25,20 +32,20 @@ void	printf_round(t_bigint *b, int index, size_t mask, char flag)
 	}
 }
 
-void	check_zero(t_bigint *f, t_round *r, int len, char flag)
+void	check_zero(t_bigint *f, t_bigint *w, t_round *r, int len, char flag)
 {
 	int	i;
 
 	i = r->index;
 	if (r->nmb_pos != len && f->num[r->index] % (r->mask / 10))
-		math_round(f, r, flag);
+		math_round(f, w, r, flag);
 	else
 	{
 		while (i > 0)
 		{
 			if ((f->num[--i] - ZERO))
 			{
-				math_round(f, r, flag);
+				math_round(f, w, r, flag);
 				return ;
 			}
 		}
@@ -46,7 +53,7 @@ void	check_zero(t_bigint *f, t_round *r, int len, char flag)
 	}
 }
 
-void	fraction_round(t_bigint *f, t_round *r)
+void	fraction_round(t_bigint *f, t_bigint *w, t_round *r)
 {
 	int pre;
 	int start_len;
@@ -67,7 +74,7 @@ void	fraction_round(t_bigint *f, t_round *r)
 			if (r->nmb_pos == 0)
 				r->nmb_pos = 18;
 		}
-		fraction_select_round(f, r, 1);
+		fraction_select_round(f, w, r, 1);
 	}
 	else
 		r->nmb_pos = 18;
@@ -79,7 +86,7 @@ void	f_round(t_bigint w, t_bigint f)
 
 	r.index = 0;
 	if (g_f->pre > 0)
-		fraction_round(&f, &r);
+		fraction_round(&f, &w, &r);
 	else
 	{
 		r.index = 0;

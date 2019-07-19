@@ -1,6 +1,29 @@
 #include "ft_printf.h"
 
-t_bigint		bigint_add_f(t_bigint a, t_bigint b)
+//t_bigint		bigint_add_f(t_bigint a, t_bigint b)
+//{
+//	t_bigint	res;
+//	char		biggest;
+//	int			biggestlen;
+//	int			i;
+//
+//	biggest = a.start > b.start ? 'a' : 'b';
+//	biggestlen = (biggest == 'a' ? a.start + 1 : b.start + 1);
+//	res.num = ft_memalloc(sizeof(size_t) * (biggestlen + 1));
+//	res.len = biggestlen + 1;
+//	i = 0;
+//	res.start = 0;
+//	while (i < res.len)
+//	{
+//		res.num[i] = ZERO;
+//		i++;
+//	}
+//	while_i_less_biggistlen(&res, a, b, 0);
+//	free(a.num);
+//	return (res);
+//}
+
+static t_bigint	bigint_add_f(t_bigint a, t_bigint b)
 {
 	t_bigint	res;
 	char		biggest;

@@ -59,8 +59,8 @@ void	select_condition(t_bigint f, t_bigint w, int nmb_pos, int index)
 	int		wlen;
 	int		len;
 
-	wlen = w.start * CLUSTER_SIZE + ft_numlen(w.num[w.start]) + w.sign;
-	len = g_f->wid - (wlen + g_f->pre + 1 + (g_f->plu || g_f->spc || w.sign));
+	wlen = w.start * CLUSTER_SIZE + ft_numlen(w.num[w.start]);
+	len = g_f->wid - (wlen + g_f->pre + 1 * !(g_f->dot && !g_f->pre) + (g_f->plu || g_f->spc || w.sign));
 	if (g_f->min)
 	{
 		f_print_sign(w.sign, g_f->plu, g_f->spc);
