@@ -12,19 +12,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3dc96cdf-41f5-4f87-93af-1ce23be61bff" name="Default Changelist" comment="fix something">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big_hex.c" beforeDir="false" afterPath="$PROJECT_DIR$/big_hex.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/c.c" beforeDir="false" afterPath="$PROJECT_DIR$/c.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_round.c" beforeDir="false" afterPath="$PROJECT_DIR$/f_round.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraction.c" beforeDir="false" afterPath="$PROJECT_DIR$/fraction.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraction_path.c" beforeDir="false" afterPath="$PROJECT_DIR$/fraction_path.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ft_printf.h" beforeDir="false" afterPath="$PROJECT_DIR$/ft_printf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hex.c" beforeDir="false" afterPath="$PROJECT_DIR$/hex.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/printf.dir/main.c.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libft/libft.a" beforeDir="false" afterPath="$PROJECT_DIR$/libft/libft.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libftprintf.a" beforeDir="false" afterPath="$PROJECT_DIR$/libftprintf.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/print_f.c" beforeDir="false" afterPath="$PROJECT_DIR$/print_f.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/s.c" beforeDir="false" afterPath="$PROJECT_DIR$/s.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/select_round.c" beforeDir="false" afterPath="$PROJECT_DIR$/select_round.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xflags.c" beforeDir="false" afterPath="$PROJECT_DIR$/xflags.c" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -171,14 +162,23 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="17" column="89" selection-start-line="17" selection-start-column="89" selection-end-line="17" selection-end-column="89" />
+                <state relative-caret-position="302">
+                  <caret line="27" selection-start-line="27" selection-end-line="27" />
                   <folding>
                     <element signature="e#0#18#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="75">
+                  <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="1814" />
                 </state>
               </provider>
             </entry>
@@ -192,7 +192,7 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/big_hex.c">
               <provider selected="true" editor-type-id="text-editor">
                 <state>
@@ -257,8 +257,8 @@
         <option value="$PROJECT_DIR$/select_round.c" />
         <option value="$PROJECT_DIR$/f_round.c" />
         <option value="$PROJECT_DIR$/print_f.c" />
-        <option value="$PROJECT_DIR$/main.c" />
         <option value="$PROJECT_DIR$/s.c" />
+        <option value="$PROJECT_DIR$/main.c" />
       </list>
     </option>
   </component>
@@ -332,7 +332,7 @@
       <workItem from="1563376771095" duration="1281000" />
       <workItem from="1563380867312" duration="9368000" />
       <workItem from="1563392888030" duration="27259000" />
-      <workItem from="1563480280244" duration="25563000" />
+      <workItem from="1563480280244" duration="26801000" />
     </task>
     <task id="LOCAL-00001" summary="fix round">
       <created>1563268240057</created>
@@ -359,7 +359,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72111000" />
+    <option name="totallyTimeSpent" value="73349000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -369,14 +369,14 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329927" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.25474453" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25474453" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Debug" order="5" weight="0.30948904" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Messages" order="8" weight="0.2751825" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.2759124" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.2759124" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.329927" />
       <window_info anchor="bottom" id="CMake" order="12" />
@@ -639,13 +639,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests.c" />
     <entry file="file://$PROJECT_DIR$/func.c">
       <provider selected="true" editor-type-id="text-editor">
@@ -853,8 +846,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fraction_path.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        <state relative-caret-position="610">
+          <caret line="70" column="38" selection-start-line="70" selection-start-column="38" selection-end-line="70" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -900,16 +893,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="89" selection-start-line="17" selection-start-column="89" selection-end-line="17" selection-end-column="89" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/big_hex.c">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -921,6 +904,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="1814" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

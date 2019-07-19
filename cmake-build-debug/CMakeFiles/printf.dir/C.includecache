@@ -20,7 +20,27 @@ unistd.h
 stdarg.h
 -
 
-/Users/rkeli/Desktop/printf/s.c
+/Users/rkeli/Desktop/printf/main.c
+stdio.h
+-
+stdlib.h
+-
+limits.h
+-
 ft_printf.h
 /Users/rkeli/Desktop/printf/ft_printf.h
+tests.h
+/Users/rkeli/Desktop/printf/tests.h
+stdint.h
+-
+time.h
+-
+float.h
+-
+math.h
+-
+fcntl.h
+-
+
+/Users/rkeli/Desktop/printf/tests.h
 
